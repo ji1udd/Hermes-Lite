@@ -32,8 +32,8 @@ derive_clock_uncertainty
 #
 create_generated_clock -divide_by 2 -source PHY_RX_CLOCK -name PHY_RX_CLOCK_2 {hermes_lite_core:hermes_lite_core_inst|ethernet:ethernet_inst|PHY_RX_CLOCK_2}
 create_generated_clock -divide_by 2 -source PHY_TX_CLOCK -name Tx_clock_2 {hermes_lite_core:hermes_lite_core_inst|ethernet:ethernet_inst|Tx_clock_2}
-create_generated_clock -divide_by 20 -source AD9866clk -name BCLK {hermes_lite_core:hermes_lite_core_inst|Hermes_clk_lrclk_gen:clrgen|BCLK}
-
+create_generated_clock -divide_by 24 -source AD9866clk -name BCLK {hermes_lite_core:hermes_lite_core_inst|Hermes_clk_lrclk_gen:clrgen|BCLK}
+create_generated_clock -divide_by 6 -source AD9866clk -name MCLK {hermes_lite_core:hermes_lite_core_inst|Hermes_clk_lrclk_gen:clrgen|MCLK}
 
 
 #*************************************************************************************
@@ -46,7 +46,7 @@ set_clock_groups -asynchronous -group { PHY_TX_CLOCK \
 					PHY_RX_CLOCK \
 					PHY_RX_CLOCK_2 \
 					} \
-					-group {ad9866_rxclk AD9866clk BCLK} \
+					-group {ad9866_rxclk AD9866clk BCLK MCLK} \
 					-group {PLL_IF_inst|altpll_component|auto_generated|pll1|clk[0]} \
 					-group {PLL_IF_inst|altpll_component|auto_generated|pll1|clk[1]} \
 					-group {PLL_IF_inst|altpll_component|auto_generated|pll1|clk[2]} 

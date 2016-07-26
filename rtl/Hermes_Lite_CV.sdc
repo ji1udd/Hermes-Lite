@@ -34,7 +34,8 @@ create_generated_clock -divide_by 2 -source [get_ports rmii_osc] -name PHY_RX_CL
 create_generated_clock -divide_by 2 -source [get_ports rmii_osc] -name PHY_TX_CLOCK {RMII2MII_rev2:RMII2MII_inst|tx_clk}
 create_generated_clock -divide_by 2 -source {RMII2MII_rev2:RMII2MII_inst|rx_clk} -name PHY_RX_CLOCK_2 {hermes_lite_core:hermes_lite_core_inst|ethernet:ethernet_inst|PHY_RX_CLOCK_2}
 create_generated_clock -divide_by 2 -source {RMII2MII_rev2:RMII2MII_inst|tx_clk} -name Tx_clock_2 {hermes_lite_core:hermes_lite_core_inst|ethernet:ethernet_inst|Tx_clock_2}
-create_generated_clock -divide_by 20 -source AD9866clk -name BCLK {hermes_lite_core:hermes_lite_core_inst|Hermes_clk_lrclk_gen:clrgen|BCLK}
+create_generated_clock -divide_by 24 -source AD9866clk -name BCLK {hermes_lite_core:hermes_lite_core_inst|Hermes_clk_lrclk_gen:clrgen|BCLK}
+create_generated_clock -divide_by 6 -source AD9866clk -name MCLK {hermes_lite_core:hermes_lite_core_inst|Hermes_clk_lrclk_gen:clrgen|MCLK}
 
 
 #*************************************************************************************
@@ -51,7 +52,7 @@ set_clock_groups -asynchronous -group {rmii_osc \
 					-group {ifclocks_cv:ifclocks_cv_inst|ifclocks_cv_0002:ifclocks_cv_inst|altera_pll:altera_pll_i|outclk_wire[0] \
 					ifclocks_cv:ifclocks_cv_inst|ifclocks_cv_0002:ifclocks_cv_inst|altera_pll:altera_pll_i|outclk_wire[2]} \
 					-group {ifclocks_cv:ifclocks_cv_inst|ifclocks_cv_0002:ifclocks_cv_inst|altera_pll:altera_pll_i|outclk_wire[1]} \
-					-group {AD9866clk BCLK} 
+					-group {AD9866clk BCLK MCLK} 
 
 
 ## set input delays

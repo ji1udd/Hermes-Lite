@@ -30,10 +30,10 @@ module Hermes_Lite(
 	output [6:0] userout,
 	input [1:0] dipsw,	
 
-    input cwkey_i,
-    output cwkey_o,
+// input cwkey_i,
+   output cwkey_o,
 
-    input ptt_i,
+   input ptt_i,
 
 	// AD9866
 	output [5:0] ad9866_pga,
@@ -75,8 +75,26 @@ module Hermes_Lite(
 	output ADCMOSI,                
 	output ADCCLK,
  	input  ADCMISO,
-	output nADCCS	               
+	output nADCCS,	               
 
+// ----------------------------------------
+//  Audio Codec (TLV320AIC23B) I/F (8pins)
+// ----------------------------------------
+	output	CMCLK,	// Master CLK ; 11.9808 MHz
+	output	CBCLK,	// I2S BCK ; 3072kHz
+	output	CLRCIO,	// I2S LRCK ; 96kHz
+	output	CDIN,		// I2S Data Out
+	input		CDOUT,	// I2S Data In
+	output	nCS,		// SPI CS
+	output	MOSI,		// SPI Data Out	
+	output	SSCK,		// SPI CLK
+
+// --------------
+//  Iambic Keyer
+// --------------
+	input		paddle_dot_n,	// active "L"
+	input		paddle_dash_n,	// active "L"
+	output	sidetone			// Piezo sounder ("L" when no sound)
 );
 
 // PARAMETERS
@@ -90,7 +108,8 @@ parameter IP = {8'd0,8'd0,8'd0,8'd0};
 parameter CLK_FREQ = 73728000;
 
 // Number of Receivers
-parameter NR = 3; // number of receivers to implement
+//parameter NR = 3; // number of receivers to implement
+parameter NR = 2; // number of receivers to implement
 
 // IF Clocks
 wire IF_clk;
@@ -138,7 +157,7 @@ hermes_lite_core #(
 	.userout(userout),
 	.dipsw({dipsw[1],dipsw}),
 
-	.cwkey_i(cwkey_i),
+//	.cwkey_i(cwkey_i),
 	.cwkey_o(cwkey_o),
 
 	.ptt_i(ptt_i),
@@ -181,7 +200,26 @@ hermes_lite_core #(
 	.ADCMOSI(ADCMOSI),                
 	.ADCCLK(ADCCLK),
  	.ADCMISO(ADCMISO),
-	.nADCCS(nADCCS)
+	.nADCCS(nADCCS),
+	
+	// ----------------------------------------
+	//  Audio Codec (TLV320AIC23B) I/F (8pins)
+	// ----------------------------------------
+	.CMCLK(CMCLK),		// Master CLK ; 11.9808 MHz
+	.CBCLK(CBCLK),		// I2S BCK ; 3072kHz
+	.CLRCIO(CLRCIO),	// I2S LRCK ; 96kHz
+	.CDIN(CDIN),		// I2S Data Out
+	.CDOUT(CDOUT),		// I2S Data In
+	.nCS(nCS),			// SPI CS
+	.MOSI(MOSI),		// SPI Data Out	
+	.SSCK(SSCK),		// SPI CLK
+	
+	// --------------
+	//  Iambic Keyer
+	// --------------
+	.paddle_dot_n(paddle_dot_n),
+	.paddle_dash_n(paddle_dash_n),
+	.sidetone(sidetone)		// Piezo sounder ("L" when no sound)
 );             
 
 endmodule 

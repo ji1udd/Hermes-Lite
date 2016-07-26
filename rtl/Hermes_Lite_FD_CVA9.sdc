@@ -74,8 +74,8 @@ create_generated_clock -source {ifclocks_cv_inst|ifclocks_cv_inst|altera_pll_i|g
 
 create_generated_clock -name tx_output_clock -source [get_pins {hermes_lite_core_inst|ethernet_inst|network_inst|rgmii_send_inst|phyclocks_inst|phyclocks_inst|altera_pll_i|general[1].gpll~PLL_OUTPUT_COUNTER|divclk}] [get_ports {PHY_TX_CLOCK_out}]
 
-
-create_generated_clock -divide_by 20 -source AD9866clk -name BCLK {hermes_lite_core:hermes_lite_core_inst|Hermes_clk_lrclk_gen:clrgen|BCLK}
+create_generated_clock -divide_by 24 -source AD9866clk -name BCLK {hermes_lite_core:hermes_lite_core_inst|Hermes_clk_lrclk_gen:clrgen|BCLK}
+create_generated_clock -divide_by 6 -source AD9866clk -name MCLK {hermes_lite_core:hermes_lite_core_inst|Hermes_clk_lrclk_gen:clrgen|MCLK}
 
 derive_pll_clocks -use_net_name
 derive_clock_uncertainty
@@ -130,7 +130,7 @@ set_clock_groups -asynchronous -group { \
 					-group {ifclocks_cv:ifclocks_cv_inst|ifclocks_cv_0002:ifclocks_cv_inst|altera_pll:altera_pll_i|outclk_wire[0] \
 					ifclocks_cv:ifclocks_cv_inst|ifclocks_cv_0002:ifclocks_cv_inst|altera_pll:altera_pll_i|outclk_wire[2]} \
 					-group {ifclocks_cv:ifclocks_cv_inst|ifclocks_cv_0002:ifclocks_cv_inst|altera_pll:altera_pll_i|outclk_wire[1]} \
-					-group {ad9866_rxclk AD9866clk BCLK} \
+					-group {ad9866_rxclk AD9866clk BCLK MCLK} \
 					-group {clk}
 
 

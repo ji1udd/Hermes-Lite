@@ -1,82 +1,111 @@
-Hermes-Lite
-===========
+#<Font color="blue">ji1udd Hermes-Lite Enhancement</font>
+##6M Frontend using undersampling technique  
+Hermes-Lite v1.22 covers HF all bands.
+Its sampling frequency(Fs) is 73.728MHz and the first nyquist zone is under 36.764MHz.
+Hermes-Lite is a good performance system, but It does not support 6M band. 
+I thought whether Hermes-Lite could be used on 6M band by using undersampling technique, without a transverter. 
+But I have never seen any undersampling transmitters and transcevers.
+I made 6M Test Frontend board for the performance test and to realized it. 
 
-This is a work in progress to create a low-cost software defined radio HF transceiver based on a [broadband modem chip](http://www.analog.com/en/broadband-products/broadband-codecs/ad9866/products/product.html) and the [Hermes SDR](http://openhpsdr.org/wiki/index.php?title=HERMES) project. This project currently targets experimenters. About 50 Hermes-Lites have been successfully built.
+![6M Frontend](6M-Band/frontend_6M_v100/docs/frontend6m_top.jpg)
+![Test Setup](6M-Band/frontend_6M_v100/docs/frontend6m_HL122.jpg)  
 
- * [Wiki](https://github.com/softerhardware/Hermes-Lite/wiki) for documentation.
- * [Google Groups](https://groups.google.com/forum/#!forum/hermes-lite) for discussion.
- * [Tindie](https://www.tindie.com/products/SofterHardware/hermes-lite-sdr-amateur-radio-printed-circuit-board-set-pcb/) to purchase bare board sets and kits.
- * [GitHub](https://github.com/softerhardware/Hermes-Lite) for all open source hardware, software and firmware.
-  * Hermes-Lite [schematic](https://github.com/softerhardware/Hermes-Lite/raw/master/pcb/hermeslite.pdf), [BOM](https://github.com/softerhardware/Hermes-Lite/raw/master/pcb/bom.xls) and [PCB](https://www.oshpark.com/profiles/SofterHardware).
-  * Basic RF front end [schematic](https://github.com/softerhardware/Hermes-Lite/raw/master/frontend/basic/frontend.pdf), [BOM](https://github.com/softerhardware/Hermes-Lite/raw/master/frontend/basic/bom.xls) and [PCB](https://www.oshpark.com/profiles/SofterHardware).
- * [GitHub Issues](https://github.com/softerhardware/Hermes-Lite/issues) to track all bugs, feature requests and planning.
- * [Version 2.0 Architecture](https://github.com/softerhardware/Hermes-Lite/wiki/Hermes-Lite-2.0)
- * External Hermes-Lite Hardware Links
-  * [W9JSW's Hermes-Lite Power Amplifiers and Filters](https://github.com/W9JSW/Hermes-Lite/tree/Amplifiers).
-  * [IN3OTD's Hermes-Lite Experiments](http://www.qsl.net/in3otd/ham_radio/Hermes-Lite/Hermes-Lite.html).
-  * [IK1XPV's Hermes-Lite Audio Out](http://www.steila.com/blog/index.php?controller=post&action=view&id_post=4).
-  * [AB4OJ's Hermes-Lite Test Report](http://www.ab4oj.com/sdr/hermes_lite/hl_notes.pdf).
+[_Schematic_](6M-Band/frontend_6M_v100/docs/frontend6m.pdf)
+[_BOM_](6M-Band/frontend_6M_v100/docs/BOM_Frontend6m.pdf)
+[_Gerber_](6M-Band/frontend_6M_v100/gerber/frontend6.zip)
+[_Gerber-ReadMe_](6M-Band/frontend_6M_v100/gerber/ReadMe.txt)  
+[_PCB Errata and filter adjustment_](6M-Band/frontend_6M_v100/docs/Frontend6m_v1.0_PCB_Errata_and_FilterAdjustment.pdf)
 
+I got very good result. Here is the output power and IMD3 of 6M Test Frontend. 
 
- 
-## Introduction
+![RESULT](6M-Band/frontend_6M_v100/docs/6MTestFrontendResult.png)
 
-The hardware is based on Analog Devices' [AD9866](http://www.analog.com/en/broadband-products/broadband-codecs/ad9866/products/product.html) which is a 12-bit broadband modem mixed signal front end that has been repurposed as a direct down conversion and direct up conversion SDR transceiver covering 0-36 MHz. A hardware prototype has been built and tested that uses a [BeMicro SDK](http://www.arrownac.com/solutions/bemicro-sdk/) FPGA board for DSP processing. The FPGA firmware is a port of the [Hermes SDR](http://openhpsdr.org/wiki/index.php?title=HERMES) project. The ported firmware preserves enough compatibility with the original Hermes SDR so that existing Hermes front-end software may be used with the Hermes-Lite without modification. Initial receive and transmit tests show good performance and appear later in this README. All software and hardware intellectual property is open source. Contributions and derivatives are encouraged. Please follow the standard ["Fork and Pull"](https://help.github.com/articles/using-pull-requests/) model and introduce yourself on [Google Groups](https://groups.google.com/forum/#!forum/hermes-lite).
+This application takes advantage of 1st image signal ( Fs-Ftx ). 
+Therefore, AD9866 interpolation should be off (1x).   
+![Expected 6m Frontend output](6M-Band/frontend_6M_v100/docs/Expected 6m Frontend output.png)
 
+Other unnecessary spurs (e.g. 2Ftx) should be care.
+In case of Hermes-Lite v1.22,  Fs is 73.728MHz. 2Ftx is out of 6M band. 2Ftx spur can be rejected by BPF perfectly.  
+![Spectrum 30 - 70MHz](6M-Band/frontend_6M_v100/docs/frontend6m_Spur_30-70MHz.jpg)
 
-#### Project Goals
- * 0-30MHz (HF) transceiver with decent performance
- * Entirely open source and open hardware design
- * Cost of less than $150 (cost includes FPGA board) for hobbyist who build their own
- * Maintain enough compatibility with Hermes to use existing Hermes SDR front-end software with no or minor modification
+If Fs is 76.8MHz (Hermes-Lite v2 will use), 2Fx is in-band. 
+It might be weak (<-65dBc) according to the current result.
+But Fs=76.8MHz settign is not suitable for 6M.  
+![Fs=76.8MHz case](6M-Band/frontend_6M_v100/docs/HLv2_Spur_estimate.png)
 
-
-
-#### Hermes-Lite v1.21
-![Hermes-Lite121](docs/hermeslite121.jpg)
-
-#### Hermes-Lite v1.2
-![Hermes-Lite12](docs/hermeslite12.jpg)
-
-#### Hermes-Lite v0.9
-![Hermes-Lite09](docs/hermeslite.jpg)
-
-
-## Receive Experiments
-
-I compared the Hermes-Lite with a Hermes and a [SoftRock RXTX Ensemble Transceiver](http://fivedash.com/) at spotting JT65 and JT9 transmissions with [WSJT-X](http://www.physics.princeton.edu/pulsar/K1JT/wsjtx.html) software running on Linux. I connected two radios to the same antenna right at a tee so there is no additional coax for either radio. I adjusted the radios so that common spots are within a few Hz. This ensures that one radio is not spotting signals that are out of band for the other. I adjusted audio levels to be similar for both copies of WSJT-X that I am running. WSJT-X is not very sensitive to different input levels anyway. The Hermes and Hermes-Lite were both using [ghpsdr-alex](http://napan.ca/ghpsdr3/index.php/Main_Page) software running on separate computers, and the RXTX was using [Quisk](http://james.ahlstrom.name/quisk/). The Hermes has a 4-1 impedance transformer. The Hermes-Lite has a 9-1 impedance transformer to better match the 400 Ohm input of the AD9866. This explains some differences in the data. The Hermes was run with no attenuation and hence has 20 dB gain from the LTC6400-20. The Hermes-Lite was also run with integrated gain set to ~20 dB unless noted otherwise. Finally, I let everything run for several hours to get a large sample set. 
-
-
-### JT65 and JT9 Spot Data
-
-| Band | 30M | 30M | 30M | 10M | 10M | 10M | 10M | 10M |
-|:---- | ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:|
-| Total Spots | 1629  |  676  |  826  |  2421  |  1488  |  1934  |  2461  |  570  |
-| Common Spots | 1448 (88.9%)  |  647 (95.7%)  |  792 (95.9%)  |  1680 (69.4%)  |  778 (52.3%)  |  1420 (73.4%)  |  1663 (67.6%)  |  414 (72.6%)  |
-| Lite Unique Spots |  |  22 (3.3%)  |  24 (2.9%)  |  |  699 (47.0%)  |  493 (25.5%)  |  768 (31.2%)  |  39 (6.8%)  |
-| Hermes Unique Spots |  103 (6.3%)  |  7 (1.0%)  |  10 (1.2%)  |  342 (14.1%)  | |  21 (1.1%)  |  30 (1.2%)  |  117 (20.5%)  |
-| RXTX Unique Spots |   78 (4.8%)  | | |  399 (16.5%)  |  11 (0.7%)  | | | |
-| Lite Gain dB | | 20  | 28  | | 28  | 20  | 28  | 12  |
-| Lite Common SNR Average dB |  |  -8.1   |  -7.7   | | -4.7 |  -9.0  |  -9.1   |  -12.8   |
-| Hermes Common SNR Average dB | -7.3   |  -8.0   |  -7.7   |  -6.1   | |  -9.8   |  -10.2   |  -9.6   |
-| RXTX Common SNR Average dB |  -7.5   | | |  -10.0   |  -12.6   |  | |  |
-| Lite Unique SNR Average dB | |  -11.9   |  -11.5   |  |  -17.3   |  -16.2   |  -14.8   |  -15.5   |
-| Hermes Unique SNR Average dB |  -15.3   |  -13.3   |  -20.4   |  -16.9   | |  -16.0   |  -14.2   |  -18.5   |
-| RXTX Unique SNR Average dB |  -8.6   | | |  -11.9   |  -12.0   | | | |
+For more detail, refer to [_6M Support thread_](https://groups.google.com/forum/#!topic/hermes-lite/oetsCIdmZzY).
 
 
 
-The results from the Hermes-Lite compare well with the Hermes and the RXTX. You can see that on 30M all radios were about the same, maybe with a slight edge to the Hermes-Lite on unique spot count. The more interesting data is on 10M. Here there was a clear advantage to the Hermes-Lite in terms of unique spots and SNR (average SNR of all common spots) when the Hermes-Lite was run at 20 dB gain (to match the fixed gain of the Hermes but not accounting for the different input transformers) or 28 dB. When the Hermes-Lite was run with only 12 dB gain, the Hermes did better. This suggests that the Hermes might benefit from additional gain on the higher frequencies.  
+##Frontend v1.42 experiment with balanced 6M BPF.
+I converted the single-ended 6M BPF that is used on 6M Frontend board to balanced-ended's in order to apply to Frontend v1.42 circuit.
 
-When one radio has a unique spot that the other misses, it is not because the other radio missed all spots within that minute. Rather, I see that one radio spots n and the other n-1. The missed spot is not always the weakest signal. Sometimes it is a fairly strong signal. More often the missed spot is a JT9 signal, which has a narrower bandwidth and more stringent demands.
+![V1.42 6M Frontend](6M-Band/frontend_v142_with_6M_filter/docs/01_Frontend142_with_6MbalancedFilter.jpg)
+![SCHMATIC](6M-Band/frontend_v142_with_6M_filter/docs/balanced_6m_filter_schematic.jpg)
 
-I did not experience problems with exceeding the lower dynamic range of the Hermes-Lite. This may be due in part to my relatively poor antenna setup and rural town location. All experiments were with a ~7M vertical with base at ~2M above ground with a wire grape trellis as a ground plane. The vertical was tuned with a Z-match at the base. Also, the integrated gain in the Hermes-Lite with control in 1 dB steps from -12 dB to +48 dB appears useful to extend the dynamic range. There is a fast path to adjust this gain so that an AGC may be implemented.
+I got the almost same result as 6M Frontend.
 
-These experiments only test a receiver's performance at decoding JT65 and JT9 in the real world, and other proper receiver measurments should be run, but I think they are somewhat indicative of a receiver's performance in general. Even though a less expensive ADC and clock source were used when compared to the Hermes, I did not see any dramatic penalty in reception of JT65 and JT9 spots. Instead, I saw cases where the Hermes-Lite performed better. 
+![Test Setup](6M-Band/frontend_v142_with_6M_filter/docs/02_test_setting.jpg)  
+![RESULT](6M-Band/frontend_v142_with_6M_filter/docs/frontend142_Spur_30-70MHz.jpg)  
+More result is [_here_.](6M-Band/frontend_v142_with_6M_filter/docs/6m_Spur_v142_and_orignal.pdf)
 
 
-## Transmit Experiments
+##Undersampling 6M transceiver (World's 1st?)
+I made 6M transceiver using 6M Frontend. I added my new 6M power amplifier board. Its output power is 3W in CW.
+In SSB mode, the output power should be kept under 1W for good IMD3 (under -35dBc) by adjusting Drive Level (TxPGA).
+Rx Pre Amplifier on the schematic is not needed by adjusting AD9866 RxPGA.
 
-I tested transmit with [WSPR](http://www.physics.princeton.edu/pulsar/K1JT/wspr.html) and observed spots of my signal on [WSPRnet](http://wsprnet.org/). [PowerSDR](http://openhpsdr.org/wiki/index.php?title=PowerSDR) running under Windows was used to test transmit. At first, I had only 10 dBm (10 mW) output as I had not adjusted the transmit interpolation filter for the new sampling frequency. After adjusting the interpolation filter, I had 17 dBm (50 mW) output. I am using the IAMP on the AD9866 which will do 20 dBm (100 mW) and even 23 dBm (200 mW) with some distortion. I am targeting 20 dBm (100 mW) but need to get a large ferrite core to accomodate the correct turns ratio. The unique WSPR spots appear below. This is just an indicator that transmit is working and proper transmit measurments still must be made. 
+![Overview](6M-Band/PA_6M/docs/add_6mPA_AudioCodec.jpg)  
+[_Schematic_](6M-Band/PA_6M/docs/6mPA_v1.01.pdf)
+[_BOM_](6M-Band/PA_6M/docs/BOM_6m_PA.pdf)
+[_Gerber_] (6M-Band/PA_6M/gerber/amp6.zip)
 
-![WSPR Spots](docs/wsprspots.png)
+
+
+##Audio Codec
+As I have a sound trouble when PowerSDR VAC is used on my Windows8.1 PC, I added an external audio codec as a solid countermeasure.  
+I got the audio codec information from [_ik1xpv web site_](http://www.steila.com/blog/index.php?controller=post&action=view&id_post=4).
+
+![PCB](audiocodec/docs/AudioCodecPCB.jpg)  
+![Overview](audiocodec/docs/6MTRX_Keyer_AudioCodec.jpg) 
+
+[_Schematic_](audiocodec/docs/AudioCodec_v1.0.pdf)  
+[_BOM_](audiocodec/docs/BOM_Keyer_AudioCodec.pdf)  
+[_Gerber_](audiocodec/gerber/audiocodec.zip)  
+[_Audio Codec board connection CVA9_](audiocodec/docs/Connector_Assignment_BeMicroCVA9_Keyer_AudioCodec.pdf)  
+[_Mic jack jumper setting_](audiocodec/docs/Mic_Jack_jumper_setting.pdf)
+
+Now, PowerSDR and piHPSDR works well with this audio codec board.
+
+![piHPSDR](audiocodec/docs/piHPSDR_TestFrontendv1.2_AudioCodec.JPG) 
+
+
+##Iambic keyer
+I implemented  Iambic keyer functions that PowerSDR supports, except Keyer Mode-B. 
+I implemented Keyer practice mode(Keyer is active, but does not transmit) instead of Mode-B. 
+The keyer that I scratch built needs only 150 ALMs, 1 DSP block, 8K Byte block memory.
+
+![Keyer](audiocodec/docs/6MTRX_Keyer_AudioCodec.jpg)  
+
+###Supported functions
+- Variable Sidetone frequency :  
+Sidetone is always synchronized with receiver pitch. I added two new ways of sidetone output.   
+1) Square wave output for inexpensive piezo sounder.  
+2) Sine wave output through an external audio codec.  
+- Variable Speed control
+- Others  
+Keyer ON/OFF, Sidetone ON/OFF, Break in delay time, CW delay Key-Up,   
+CW delay Key-Down,Reverse Paddles,Weight
+
+[_Keyer installation diagram_](audiocodec/docs/IambicKeyer_installation_diagram.pdf)  
+[_Keyer sequence and setting_](audiocodec/docs/Keyer_Sequece_and_setting.pdf)  
+[_Modification of PCB (Schematic)_](audiocodec/docs/Modification_of_Audio_Codec_Board_for_keyer_schematic.pdf)  
+[_Modification of PCB (photo)_](audiocodec/docs/Modification_of_Audio_Codec_Board_for_keyer.jpg)   
+[_Keyer connection CVA9_](audiocodec/docs/Connector_Assignment_BeMicroCVA9_Keyer_AudioCodec.pdf)  
+[_Keyer connection SDK (Not Verified Yet)_](audiocodec/docs/Connector_Assignment_BeMicroSDK_Keyer_AudioCodec.pdf)  
+
+Verilog-HDL code was relased on my git (27 July 2016).  
+
+
+
+

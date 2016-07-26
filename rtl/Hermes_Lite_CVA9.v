@@ -29,9 +29,9 @@ module Hermes_Lite(
 	output [6:0] userout,
 	input [2:0] dipsw,
 
-    input cwkey_i,
-    output cwkey_o,
-    input ptt_i,
+// input cwkey_i,
+   output cwkey_o,
+   input ptt_i,
 
 	// AD9866
 	output [5:0] ad9866_pga,
@@ -71,7 +71,26 @@ module Hermes_Lite(
 	output ADCMOSI,                
 	output ADCCLK,
  	input  ADCMISO,
-	output nADCCS
+	output nADCCS,
+
+// ----------------------------------------
+//  Audio Codec (TLV320AIC23B) I/F (8pins)
+// ----------------------------------------
+	output	CMCLK,	// Master CLK ; 12.288 MHz
+	output	CBCLK,	// I2S BCK ; 3072kHz
+	output	CLRCIO,	// I2S LRCK ; 48kHz
+	output	CDIN,		// I2S Data Out
+	input		CDOUT,	// I2S Data In
+	output	nCS,		// SPI CS
+	output	MOSI,		// SPI Data Out	
+	output	SSCK,		// SPI CLK
+
+// --------------
+//  Iambic Keyer
+// --------------
+	input		paddle_dot_n,	// active "L"
+	input		paddle_dash_n,	// active "L"
+	output	sidetone			// Piezo sounder ("L" when no sound)
 );
 
 // PARAMETERS
@@ -86,7 +105,8 @@ parameter IP = {8'd0,8'd0,8'd0,8'd0};
 parameter CLK_FREQ = 73728000;
 
 // Number of Receivers
-parameter NR = 3; // number of receivers to implement
+//parameter NR = 3; // number of receivers to implement
+parameter NR = 1; // number of receivers to implement
 
 parameter GIGABIT = 1;
 
@@ -98,6 +118,8 @@ wire slowclk;
 wire testAD9866clk;
 wire AD9866clkX1;
 wire IF_locked;
+
+
 ifclocks_cv ifclocks_cv_inst(
 	.refclk(clk),
 	.rst(1'b0),
@@ -137,12 +159,12 @@ hermes_lite_core #(
 	.IF_locked(IF_locked),
 
  	.extreset(extreset),
-	.leds(leds), 
+	.leds(leds),
 	.exp_ptt_n(exp_ptt_n),
 	.userout(userout),
 	.dipsw(dipsw),
 
-	.cwkey_i(cwkey_i),
+//	.cwkey_i(cwkey_i),
 	.cwkey_o(cwkey_o),
 
 	.ptt_i(ptt_i),
@@ -186,7 +208,26 @@ hermes_lite_core #(
 	.ADCMOSI(ADCMOSI),                
 	.ADCCLK(ADCCLK),
  	.ADCMISO(ADCMISO),
-	.nADCCS(nADCCS)	
+	.nADCCS(nADCCS),
+
+	// ----------------------------------------
+	//  Audio Codec (TLV320AIC23B) I/F (8pins)
+	// ----------------------------------------
+	.CMCLK(CMCLK),		// Master CLK ; 12.288 MHz
+	.CBCLK(CBCLK),		// I2S BCK ; 3072kHz
+	.CLRCIO(CLRCIO),	// I2S LRCK ; 48kHz
+	.CDIN(CDIN),		// I2S Data Out
+	.CDOUT(CDOUT),		// I2S Data In
+	.nCS(nCS),			// SPI CS
+	.MOSI(MOSI),		// SPI Data Out	
+	.SSCK(SSCK),		// SPI CLK
+	
+	// --------------
+	//  Iambic Keyer
+	// --------------
+	.paddle_dot_n(paddle_dot_n),
+	.paddle_dash_n(paddle_dash_n),
+	.sidetone(sidetone)		// Piezo sounder ("L" when no sound)
 );             
 
 //reg clkcheck;

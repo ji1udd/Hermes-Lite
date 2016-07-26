@@ -138,7 +138,6 @@ set_location_assignment PIN_P6 -to ADCMOSI
 set_location_assignment PIN_N8 -to ADCCLK
 set_location_assignment PIN_L8 -to ADCMISO
 set_location_assignment PIN_G5 -to nADCCS
-set_location_assignment PIN_M7 -to cwkey_i
 set_location_assignment PIN_L7 -to cwkey_o
 set_location_assignment PIN_F3 -to ptt_i
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
@@ -167,9 +166,29 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ADCMOSI
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ADCCLK
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ADCMISO
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to nADCCS
-set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to cwkey_i
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to ptt_i
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_location_assignment PIN_T11 -to CBCLK
+set_location_assignment PIN_J2 -to sidetone
+set_location_assignment PIN_M7 -to paddle_dot_n
+set_location_assignment PIN_R3 -to paddle_dash_n
+set_location_assignment PIN_L1 -to nCS
+set_location_assignment PIN_M6 -to SSCK
+set_location_assignment PIN_T2 -to MOSI
+set_location_assignment PIN_N2 -to CMCLK
+set_location_assignment PIN_R16 -to CLRCIO
+set_location_assignment PIN_N16 -to CDIN
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to paddle_dot_n
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to paddle_dash_n
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to CDOUT
+set_global_assignment -name QIP_FILE sin8k8r.qip
+set_global_assignment -name VERILOG_FILE KeyerWrapper.v
+set_global_assignment -name QIP_FILE div18_9.qip
+set_global_assignment -name QIP_FILE div11_8.qip
+set_global_assignment -name QIP_FILE mult16_8.qip
+set_global_assignment -name VERILOG_FILE Keyer.v
+set_global_assignment -name VERILOG_FILE I2S_rcv.v
+set_global_assignment -name VERILOG_FILE I2S_xmit.v
+set_global_assignment -name VERILOG_FILE TLV320_SPI.v
 set_global_assignment -name SDC_FILE Hermes_Lite_SDK.sdc
 set_global_assignment -name VERILOG_FILE Hermes_Lite_SDK.v
 set_global_assignment -name VERILOG_FILE hermes_lite_core.v
@@ -238,3 +257,5 @@ set_global_assignment -name QIP_FILE EPCS_fifo.qip
 set_global_assignment -name QIP_FILE Tx_fifo.qip
 set_global_assignment -name QIP_FILE PHY_Rx_fifo.qip
 set_global_assignment -name QIP_FILE ad9866clk_sdk.qip
+set_global_assignment -name SOURCE_FILE db/Hermes_Lite_12SDK.cmp.rdb
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

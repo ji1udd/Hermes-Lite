@@ -70,7 +70,7 @@ module hermes_lite_core(
     output [6:0] userout,
     input [2:0] dipsw,
 
-    input cwkey_i,
+//  input cwkey_i,
     output cwkey_o,
 
     input ptt_i,
@@ -91,7 +91,26 @@ module hermes_lite_core(
     output ADCMOSI,                
     output ADCCLK,
     input  ADCMISO,
-    output nADCCS
+    output nADCCS,
+
+	// ----------------------------------------
+	//  Audio Codec (TLV320AIC23B) I/F (8pins)
+	// ----------------------------------------
+	output	CMCLK,	// Master CLK ; 12.288 MHz
+	output	CBCLK,	// I2S BCK ; 3072kHz
+	output	CLRCIO,	// I2S LRCK ; 48kHz
+	output	CDIN,		// I2S Data Out
+	input		CDOUT,	// I2S Data In
+	output	nCS,		// SPI CS
+	output	MOSI,		// SPI Data Out	
+	output	SSCK,		// SPI CLK
+
+	// --------------
+	//  Iambic Keyer
+	// --------------
+	input		paddle_dot_n,
+	input		paddle_dash_n,
+	output	sidetone		// Piezo sounder ("L" when no sound)
 );
 
 // PARAMETERS
@@ -251,6 +270,31 @@ localparam bit [0:19][8:0] initarray_6m = {
     {1'b0,8'h00}  // Address 0x13,     
 };
 
+localparam bit [0:19][8:0] initarray_6m_IAMPON = {
+    // First bit is 1'b1 for write enable to that address
+    {1'b1,8'h80}, // Address 0x00, enable 4 wire SPI
+    {1'b0,8'h00}, // Address 0x01,
+    {1'b0,8'h00}, // Address 0x02, 
+    {1'b0,8'h00}, // Address 0x03, 
+    {1'b1,8'h00}, // Address 0x04, // No multiply of oscillator for no interpolation
+    {1'b0,8'h00}, // Address 0x05, 
+    {1'b1,8'h00}, // Address 0x06, // No divide down for FPGA clock
+    {1'b1,8'h20}, // Address 0x07, Initiate DC offset calibration and RX filter *OFF*
+    {1'b1,8'h4b}, // Address 0x08, RX filter f-3db at ~34 MHz after scaling
+    {1'b0,8'h00}, // Address 0x09, 
+    {1'b0,8'h00}, // Address 0x0a, 
+    {1'b1,8'h20}, // Address 0x0b, RX gain only on PGA
+    {1'b1,8'h81}, // Address 0x0c, TX twos complement and interpolation factor
+    {1'b1,8'h01}, // Address 0x0d, RX twos complement 
+    {1'b0,8'h01}, // Address 0x0e, Enable/Disable IAMP // takashi
+    {1'b0,8'h00}, // Address 0x0f,     
+    {1'b0,8'h84}, // Address 0x10, Select TX gain
+    {1'b1,8'h00}, // Address 0x11, Select TX gain
+    {1'b0,8'h00}, // Address 0x12, 
+    {1'b0,8'h00}  // Address 0x13,     
+};
+
+
 localparam bit [0:19][8:0] initarray_regular = {
     // First bit is 1'b1 for write enable to that address
     {1'b1,8'h80}, // Address 0x00, enable 4 wire SPI
@@ -276,16 +320,17 @@ localparam bit [0:19][8:0] initarray_regular = {
 };
 
 
-localparam disable_IAMP = 1'b0; 
+localparam disable_IAMP = 1'b1; 
 localparam bit [0:19][8:0] initarray0 = (disable_IAMP == 1) ? initarray_disable_IAMP : initarray_regular;
+//localparam bit [0:19][8:0] initarray0 = initarray_6m_IAMPON;
 
 
 // Set initarray1 to other value to select between two configurations
 // Must reset or repower HL to take effect 
-localparam bit [0:19][8:0] initarray1 = initarray0;
+//localparam bit [0:19][8:0] initarray1 = initarray0;
 
 // No interpolation and not filter for 6M
-//localparam bit [0:19][8:0] initarray1 = initarray_6m;
+localparam bit [0:19][8:0] initarray1 = initarray_6m;
 
 // Based on dip switch
 // SDK has just two dip switches, dipsw[2]==dipsw[1] in SDK, dipsw[1] 
@@ -294,7 +339,6 @@ localparam bit [0:19][8:0] initarray1 = initarray0;
 // dipsw[2:1] select alternate MAC addresses
 // dipsw[0] selects to identify as hermes or hermes-lite
 // Use dipsw[2] is used for initarray selection. This will also change the MAC but that is okay and may be desirable
-
 
 //--------------------------------------------------------------
 // Reset Lines - C122_rst, IF_rst
@@ -313,11 +357,10 @@ cdc_sync #(1)
 //---------------------------------------------------------
 
 wire CLRCLK;
-
-wire C122_cbclk, C122_cbrise, C122_cbfall;
+wire C122_cbclk, C122_cbrise, C122_cbfall, C122_LRfall, MCLKrise;
 Hermes_clk_lrclk_gen #(.CLK_FREQ(CLK_FREQ)) clrgen (.reset(C122_rst), .CLK_IN(AD9866clkX1), .BCLK(C122_cbclk),
-                             .Brise(C122_cbrise), .Bfall(C122_cbfall), .LRCLK(CLRCLK));
-
+                             .Brise(C122_cbrise), .Bfall(C122_cbfall), .LRCLK(CLRCLK), .LRfall(C122_LRfall),
+									  .MCLK(CMCLK), .MCLKrise(MCLKrise));
 
 wire Tx_clock_2;
 wire Tx_fifo_rdreq;
@@ -488,7 +531,7 @@ generate
     end
 endgenerate
 
-assign IF_mic_Data = 0;
+// assign IF_mic_Data = 0;
 
 //---------------------------------------------------------
 //      De-ramdomizer
@@ -669,7 +712,7 @@ assign ad9866_adio = FPGA_PTT ? DACDp : 12'bZ;
 `endif
 
 
-assign exp_ptt_n = FPGA_PTT;
+//assign exp_ptt_n = FPGA_PTT;
 assign userout = IF_OC;
 
 
@@ -768,7 +811,7 @@ assign agc_clrgoodlvl = (agc_delaycnt[21:0] == 22'b1011111111111110111111);
 
 // cdc_sync is used to transfer from a slow to a fast clock domain
 
-wire  [31:0] C122_LR_data;
+//wire  [31:0] C122_LR_data;
 wire  C122_DFS0, C122_DFS1;
 wire  C122_rst;
 wire  signed [15:0] C122_I_PWM;
@@ -1645,8 +1688,16 @@ reg   [5:0] Alex_manual_HPF;        // Alex HPF relay selection in manual mode
 reg   [4:0] Hermes_atten;           // 0-31 dB Heremes attenuator value
 reg         Hermes_atten_enable; // enable/disable bit for Hermes attenuator
 reg         TR_relay_disable;       // Alex T/R relay disable option
-reg         IF_Pure_signal;              // 
-reg   [3:0]  IF_Predistortion;              // 
+reg         IF_Pure_signal;			// 
+reg   [3:0]	IF_Predistortion;			// 
+reg	      IF_CW_keys_reversed ;	// 0:disable, 1:enable
+reg	[5:0]	IF_Keyer_speed ;			// 1 - 60 WPM
+reg	[1:0]	IF_Keyer_Mode ;			// 00:straight, 01:Mode A, 10:Mode B
+reg	[6:0]	IF_Keyer_Weight ;			// 0 - 100
+reg	[7:0]	IF_CW_Sidetone_Vol ;		// 0 - 127
+reg	[7:0]	IF_CW_PTT_delay ;			// 0 - 255  ms
+reg	[9:0] IF_CW_Hang_Time ;			// 0 - 1023 ms
+reg  [11:0] IF_CW_Tone_Freq ;			// 200 - 2250Hz 
 
 always @ (posedge IF_clk)
 begin 
@@ -1684,10 +1735,17 @@ begin
      Alex_manual_LPF      <= 7'b0;     // default manual settings, no Alex LPF filters selected
      IF_Line_In_Gain      <= 5'b0;     // default line-in gain at min
      Hermes_atten         <= 5'b0;     // default zero input attenuation
-     Hermes_atten_enable <= 1'b0;       // default disable Hermes attenuator
+     Hermes_atten_enable <= 1'b0;      // default disable Hermes attenuator
      IF_Pure_signal      <= 1'b0;      // default disable pure signal
      IF_Predistortion    <= 4'b0000;   // default disable predistortion
-    
+     IF_CW_keys_reversed <= 1'b0 ;		// default disable keys reverse
+     IF_Keyer_speed  <= 6'd25 ;			// default 25WPM
+     IF_Keyer_Mode   <= 2'd0 ;			// default Keyer disable
+	  IF_Keyer_Weight <= 7'd50 ;			// default 50
+	  IF_CW_Sidetone_Vol <= 8'd80 ;		// default 80
+     IF_CW_PTT_delay <= 8'd10 ;			// default 10ms
+	  IF_CW_Hang_Time <= 10'd200 ;		// default 200ms
+	  IF_CW_Tone_Freq <= 12'd600 ;		// default 600Hz 
   end
   else if (IF_Rx_save)                  // all Rx_control bytes are ready to be saved
   begin                                         // Need to ensure that C&C data is stable 
@@ -1714,6 +1772,7 @@ begin
     if (IF_Rx_ctrl_0[7:1] == 7'b0001_001)
     begin
       IF_Drive_Level      <= IF_Rx_ctrl_1;          // decode drive level 
+// IF_Drive_Level <= {IF_Rx_ctrl_1[5:0], 2'b11} ; // temporary countermeasure for piHPSDR
       IF_Mic_boost        <= IF_Rx_ctrl_2[0];       // decode mic boost 0 = 0dB, 1 = 20dB  
       IF_Line_In          <= IF_Rx_ctrl_2[1];       // 0 = Mic input, 1 = Line In
 //    IF_Filter           <= IF_Rx_ctrl_2[2];       // 1 = enable Apollo filter
@@ -1734,7 +1793,28 @@ begin
         Hermes_atten      <= IF_Rx_ctrl_4[4:0];    // decode input attenuation setting
       Hermes_atten_enable <= IF_Rx_ctrl_4[5];    // decode Hermes attenuator enable/disable
     end
-     if (IF_Rx_ctrl_0[7:1] == 7'b0101_011)
+	 
+    if (IF_Rx_ctrl_0[7:1] == 7'b0001_011)
+    begin
+	   IF_CW_keys_reversed <= IF_Rx_ctrl_2[6];	// decode CW keys reversed setting
+      IF_Keyer_speed   <= IF_Rx_ctrl_3[5:0];		// decode Keyer speed setting
+      IF_Keyer_Mode    <= IF_Rx_ctrl_3[7:6];		// decode Keyer Mode setting
+	   IF_Keyer_Weight  <= IF_Rx_ctrl_4[6:0];		// decode Keyer Weight setting
+	 end
+	 
+    if (IF_Rx_ctrl_0[7:1] == 7'b0001_111)
+    begin
+		IF_CW_Sidetone_Vol <= IF_Rx_ctrl_2[7:0];	// decode CW Sidetone Vol setting
+      IF_CW_PTT_delay  <= IF_Rx_ctrl_3[7:0];		// decode CW PTT delay setting
+    end
+
+    if (IF_Rx_ctrl_0[7:1] == 7'b0010_000)
+    begin
+		IF_CW_Hang_Time <= {IF_Rx_ctrl_1, IF_Rx_ctrl_2[1:0]} ;	// decode CW Hang Time setting
+	   IF_CW_Tone_Freq <= {IF_Rx_ctrl_3, IF_Rx_ctrl_4[3:0]} ;	// decode CW Sidetone frequency setting
+	 end
+
+    if (IF_Rx_ctrl_0[7:1] == 7'b0101_011)
     begin
      // DACLUT[{IF_Rx_ctrl_1[3:0], IF_Rx_ctrl_2[7:0]}]<= {IF_Rx_ctrl_3[3:0], IF_Rx_ctrl_4[7:0]};
       if(IF_Rx_ctrl_1==8'b0000_0000)//predistortion control sub index
@@ -1867,7 +1947,7 @@ assign ad9866_pga = ad9866_pga_d;
 reg   [2:0] IF_PWM_state;      // state for PWM
 reg   [2:0] IF_PWM_state_next; // next state for PWM
 reg  [15:0] IF_Left_Data;      // Left 16 bit PWM data for D/A converter
-//reg  [15:0] IF_Right_Data;     // Right 16 bit PWM data for D/A converter
+reg  [15:0] IF_Right_Data;     // Right 16 bit PWM data for D/A converter
 reg  [15:0] IF_I_PWM;          // I 16 bit PWM data for D/A conveter
 reg  [15:0] IF_Q_PWM;          // Q 16 bit PWM data for D/A conveter
 wire        IF_get_samples;
@@ -1901,7 +1981,7 @@ begin
   // get Right audio
   if (IF_PWM_state == PWM_RIGHT)
   begin
-    //IF_Right_Data  <= #IF_TPD IF_Rx_fifo_rdata;
+    IF_Right_Data  <= #IF_TPD IF_Rx_fifo_rdata;
 
      if(IF_Left_Data[12] )
         PD1.DACLUTQ[IF_Left_Data[11:0]]<= IF_Rx_fifo_rdata[12:0];
@@ -1930,6 +2010,14 @@ begin
     IF_PWM_state   <= #IF_TPD PWM_IDLE;
   else
     IF_PWM_state   <= #IF_TPD IF_PWM_state_next;
+
+  // get Left audio
+  if (IF_PWM_state == PWM_LEFT)
+    IF_Left_Data   <= #IF_TPD IF_Rx_fifo_rdata;
+
+  // get Right audio
+  if (IF_PWM_state == PWM_RIGHT)
+    IF_Right_Data  <= #IF_TPD IF_Rx_fifo_rdata;
 
   // get I audio
   if (IF_PWM_state == PWM_I_AUDIO)
@@ -2019,7 +2107,7 @@ reg [1:0] cwstate;
 localparam  cwrx = 2'b00, cwkeydown = 2'b01, cwkeyup = 2'b11;
 
 // 5 ms debounce with 48 MHz clock
-debounce de_cwkey(.clean_pb(clean_cwkey), .pb(~cwkey_i), .clk(IF_clk));
+//debounce de_cwkey(.clean_pb(clean_cwkey), .pb(~cwkey_i), .clk(IF_clk));
 
 // CW state machine
 always @(posedge IF_clk)
@@ -2062,14 +2150,14 @@ cdc_sync #(15)
 //---------------------------------------------------------
 
 //debounce de_dot(.clean_pb(clean_dot), .pb(~KEY_DOT), .clk(IF_clk));
-assign clean_dot = 0;
+//assign clean_dot = 0;
 
 //---------------------------------------------------------
 //  Debounce dash key - active low
 //---------------------------------------------------------
 
 //debounce de_dash(.clean_pb(clean_dash), .pb(~KEY_DASH), .clk(IF_clk));
-assign clean_dash = 0;
+//assign clean_dash = 0;
 
 
 
@@ -2103,7 +2191,8 @@ always @ (posedge ad9866spiclk)
 
 assign ad9866rqst = dd != lastdd;
 
-ad9866 #(.initarray0(initarray0), .initarray1(initarray1)) ad9866_inst(.reset(~ad9866_rst_n),.clk(ad9866spiclk),.initarray_sel(dipsw[2]),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.extrqst(ad9866rqst),.gain(dd));
+//ad9866 #(.initarray0(initarray0), .initarray1(initarray1)) ad9866_inst(.reset(~ad9866_rst_n),.clk(ad9866spiclk),.initarray_sel(dipsw[2]),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.extrqst(ad9866rqst),.gain(dd));
+ad9866 #(.initarray0(initarray0), .initarray1(initarray1)) ad9866_inst(.reset(~ad9866_rst_n),.clk(ad9866spiclk),.initarray_sel(~dipsw[1]),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.extrqst(ad9866rqst),.gain(dd));
 
 // Really 0.16 seconds at Hermes-Lite 61.44 MHz clock
 localparam half_second = 10000000; // at 48MHz clock rate
@@ -2150,5 +2239,107 @@ begin
 end
 endfunction
 
+// ============================================================================== //
+//		External Audio Codec
+// ============================================================================== //
+
+assign CBCLK   = C122_cbclk ;	// BCLK 73728000/48000/64 = 3072000 Hz
+assign CLRCIO  = CLRCLK;		// LRCK 48 kHz
+
+//------------------------
+//	Audio Codec SPI 
+//------------------------
+
+TLV320_SPI
+  TLV (.clk(AD9866clkX1), .MCLKrise(MCLKrise),
+			.nCS(nCS), .MOSI(MOSI), .SSCK(SSCK),
+         .boost(IF_Mic_boost),
+         .line(IF_Line_In),
+         .line_in_gain(IF_Line_In_Gain) );
+			
+//------------------------
+//	Audio Codec I2S (Tx)
+//------------------------
+wire [31:0] i2s_tx_data ;
+I2S_xmit #(.DATA_BITS(32))
+  LR (.rst(C122_rst), .lrclk(CLRCLK), .clk(AD9866clkX1),
+      .CBrise(C122_cbrise), .CBfall(C122_cbfall),
+//    .sample(C122_LR_data),
+      .sample(i2s_tx_data),
+		.outbit(CDIN));
+
+//------------------------
+//	Audio Codec I2S (Rx)
+//------------------------
+wire [31:0] C122_mic_LR;
+wire        C122_mic_rdy;
+reg  [15:0] C122_mic_data;
+
+// Get I2S CDOUT mic data from TLV320.  NOTE: only 16 bits used
+I2S_rcv #(32,2,1) // WARNING: values 2,1 may need adjusting for best capture of data
+    MIC (.xrst(C122_rst), .xclk(AD9866clkX1), .BCLK(CBCLK), .LRCLK(CLRCLK), .din(CDOUT),.xData(C122_mic_LR),.xData_rdy(C122_mic_rdy));
+
+always @(posedge AD9866clkX1)
+  begin
+    if (C122_mic_rdy)				// this happens before LRfall
+      C122_mic_data <= C122_mic_LR[31:16];	// we're only using the Left data
+  end
+
+// transfer mic data into the IF_clk domain
+cdc_sync #(16)
+  cdc_mic (.siga(C122_mic_data), .rstb(IF_rst), .clkb(IF_clk), .sigb(IF_mic_Data)); 
+
+// transfer L/R audio data into 122.88MHz clock domain
+//cdc_sync #(32)
+//  LR_audio (.siga({IF_Left_Data,IF_Right_Data}), .rstb(C122_rst), .clkb(AD9866clkX1), .sigb(C122_LR_data)); 
+
+wire clear_LR_update = ~( IF_rst | LR_update_dly[1] ) ;
+
+reg LR_update ;
+always @ (posedge IF_clk or negedge clear_LR_update) 
+  if (!clear_LR_update)
+    LR_update <= 1'b0 ;
+  else if (IF_PWM_state == PWM_RIGHT)
+    LR_update <= 1'b1 ;
+	 
+reg [1:0] LR_update_dly ;
+always @(posedge AD9866clkX1)
+    LR_update_dly <= { LR_update_dly[0], LR_update};
+  
+reg [31:0] C122_LR_data ;
+always @(posedge AD9866clkX1)
+  if (LR_update_dly==2'b11)
+      C122_LR_data <= {IF_Left_Data,IF_Right_Data};
+
+// ============================================================================== //
+//	Iambic Keyer
+//      IF_Keyer_Mode: 00=Straight, 10=Iambic, 01=PracticeMode, 11=Not defined
+// ============================================================================== //
+
+KeyerWrapper keyerwapper(
+	.IF_clk(IF_clk),							// 48MHz for I/F
+	.IF_rst(IF_rst),
+	.AD9866clkX1(AD9866clkX1),				// 73.728MHz for audio
+	.C122_rst(C122_rst),
+	.C122_LRfall(C122_LRfall),
+	.paddle_dot_n(paddle_dot_n),			// Dot  Key (Active "L")
+	.paddle_dash_n(paddle_dash_n),		// Dash Key (Active "L")
+	.IF_Keyer_Mode(IF_Keyer_Mode),
+	.IF_CW_keys_reversed(IF_CW_keys_reversed),
+	.IF_Keyer_speed(IF_Keyer_speed),
+	.IF_Keyer_Weight(IF_Keyer_Weight),
+	.IF_CW_Hang_Time(IF_CW_Hang_Time),
+	.IF_CW_Tone_Freq(IF_CW_Tone_Freq),
+	.IF_CW_Sidetone_Vol(IF_CW_Sidetone_Vol),
+	.IF_CW_PTT_delay(IF_CW_PTT_delay),
+	.C122_LR_data(C122_LR_data),			// AudioCodec hook in
+	.i2s_tx_data(i2s_tx_data),				// AudioCodec hook out
+	.FPGA_PTT(FPGA_PTT),						// PTT hook in
+	.exp_ptt_n(exp_ptt_n),					// PTT hook out (Active "H")
+	.clean_cwkey(clean_cwkey),				// CW lamp up/down control (Active "H")
+	.sidetone(sidetone)						// Squarewave ("L" when no sound)
+) ;
+
+// ============================================================================== //
 
 endmodule 
