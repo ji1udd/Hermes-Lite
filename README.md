@@ -67,7 +67,6 @@ As I have a sound trouble when PowerSDR VAC is used on my Windows8.1 PC, I added
 I got the audio codec information from [_ik1xpv web site_](http://www.steila.com/blog/index.php?controller=post&action=view&id_post=4).
 
 ![PCB](audiocodec/docs/AudioCodecPCB.jpg)  
-![Overview](audiocodec/docs/6MTRX_Keyer_AudioCodec.jpg) 
 
 [_Schematic_](audiocodec/docs/AudioCodec_v1.0.pdf)  
 [_BOM_](audiocodec/docs/BOM_Keyer_AudioCodec.pdf)  
@@ -104,7 +103,7 @@ CW delay Key-Down,Reverse Paddles,Weight
 [_Keyer connection CVA9_](audiocodec/docs/Connector_Assignment_BeMicroCVA9_Keyer_AudioCodec.pdf)  
 [_Keyer connection SDK (Not Verified Yet)_](audiocodec/docs/Connector_Assignment_BeMicroSDK_Keyer_AudioCodec.pdf)  
 
-Verilog-HDL code was relased on my git (27 July 2016).  
+Verilog-HDL code was released on my git (27 July 2016).  
 
 
 
