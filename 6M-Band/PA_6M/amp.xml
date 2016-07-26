@@ -1,0 +1,1266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>D:\KiCad\Hermes-Lite\PA_6m\amp.sch</source>
+    <date>2016/06/11 15:52:44</date>
+    <tool>Eeschema 4.0.2-stable</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>6m Test Power Amplifier</title>
+        <company>SofterHardware</company>
+        <rev>1.0</rev>
+        <date>2016-06-09</date>
+        <source>amp.sch</source>
+        <comment number="1" value="JI1UDD"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C11">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>547BF1D3</tstamp>
+    </comp>
+    <comp ref="P1">
+      <value>Antenna</value>
+      <footprint>HERMESLITE_PA6:rfconnectorB-1</footprint>
+      <libsource lib="conn" part="BNC"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>547CC8B6</tstamp>
+    </comp>
+    <comp ref="R11">
+      <value>4.7</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="R-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54AE9C13</tstamp>
+    </comp>
+    <comp ref="Q2">
+      <value>RD06HHF1</value>
+      <footprint>HERMESLITE:TO-220_Neutral123_Vertical</footprint>
+      <libsource lib="hermeslite" part="RD16HHF1"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54AE9D92</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>0</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="R-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54B1AF90</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>DNI</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="R-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54B1B0A6</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>DNI</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="R-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54B1B29F</tstamp>
+    </comp>
+    <comp ref="C7">
+      <value>1uF</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54B3D855</tstamp>
+    </comp>
+    <comp ref="P7">
+      <value>12V</value>
+      <footprint>HERMESLITE_PA6:PINHEAD1-2</footprint>
+      <libsource lib="conn" part="CONN_01X02"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>550EC103</tstamp>
+    </comp>
+    <comp ref="C2">
+      <value>1uF</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>55E26FC3</tstamp>
+    </comp>
+    <comp ref="C5">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>55E47790</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>4.7k</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="R-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5628F05D</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>2.2k</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="R-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5628F10E</tstamp>
+    </comp>
+    <comp ref="L4">
+      <value>T37-6</value>
+      <footprint>HERMESLITE_PA6:T37_SL</footprint>
+      <libsource lib="device" part="INDUCTOR"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5719595F</tstamp>
+    </comp>
+    <comp ref="L5">
+      <value>T37-6</value>
+      <footprint>HERMESLITE_PA6:T37_SL</footprint>
+      <libsource lib="device" part="INDUCTOR"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57195AA1</tstamp>
+    </comp>
+    <comp ref="C35">
+      <value>120p</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57196839</tstamp>
+    </comp>
+    <comp ref="P2">
+      <value>TX IN</value>
+      <footprint>HERMESLITE:rfconnector</footprint>
+      <libsource lib="conn" part="BNC"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574AE058</tstamp>
+    </comp>
+    <comp ref="T1">
+      <value>BN43-2402</value>
+      <footprint>HERMESLITE_PA6:BN43-2402_TRNS</footprint>
+      <libsource lib="device" part="TRANSFO"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574AF0BE</tstamp>
+    </comp>
+    <comp ref="P8">
+      <value>RX IN</value>
+      <footprint>HERMESLITE:rfconnector</footprint>
+      <libsource lib="conn" part="BNC"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574AF404</tstamp>
+    </comp>
+    <comp ref="C6">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574B00E3</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>1k</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="R-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574B0347</tstamp>
+    </comp>
+    <comp ref="R9">
+      <value>1k</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="R-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574B13E4</tstamp>
+    </comp>
+    <comp ref="C10">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574B193B</tstamp>
+    </comp>
+    <comp ref="Q1">
+      <value>RD06HHF1</value>
+      <footprint>HERMESLITE:TO-220_Neutral123_Vertical</footprint>
+      <libsource lib="hermeslite" part="RD16HHF1"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574B2CA2</tstamp>
+    </comp>
+    <comp ref="R10">
+      <value>4.7</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="R-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574B2DB3</tstamp>
+    </comp>
+    <comp ref="T2">
+      <value>FT37-61</value>
+      <footprint>HERMESLITE_PA6:FT37_DF</footprint>
+      <libsource lib="hermeslite6" part="TOR2"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574B3432</tstamp>
+    </comp>
+    <comp ref="T3">
+      <value>FT37-61</value>
+      <footprint>HERMESLITE_PA6:FT37_DF</footprint>
+      <libsource lib="hermeslite6" part="TOR2"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574B6BE4</tstamp>
+    </comp>
+    <comp ref="C26">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574B6E8C</tstamp>
+    </comp>
+    <comp ref="C27">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574B6FB7</tstamp>
+    </comp>
+    <comp ref="C18">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574B95D5</tstamp>
+    </comp>
+    <comp ref="C19">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>574B9706</tstamp>
+    </comp>
+    <comp ref="C33">
+      <value>30p</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5756ED0C</tstamp>
+    </comp>
+    <comp ref="C31">
+      <value>30p</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5756F460</tstamp>
+    </comp>
+    <comp ref="C39">
+      <value>DNI</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5756F6E4</tstamp>
+    </comp>
+    <comp ref="C38">
+      <value>120p</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5756F6F1</tstamp>
+    </comp>
+    <comp ref="VR2">
+      <value>10k</value>
+      <footprint>HERMESLITE_PA6:POT_3296W</footprint>
+      <libsource lib="device" part="POT"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57571CE0</tstamp>
+    </comp>
+    <comp ref="VR1">
+      <value>10k</value>
+      <footprint>HERMESLITE_PA6:POT_3296W</footprint>
+      <libsource lib="device" part="POT"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57571CED</tstamp>
+    </comp>
+    <comp ref="C22">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575858E4</tstamp>
+    </comp>
+    <comp ref="C23">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575858EA</tstamp>
+    </comp>
+    <comp ref="Q3">
+      <value>MMBFJ310</value>
+      <footprint>HERMESLITE_PA6:SOT23-123</footprint>
+      <libsource lib="device" part="Q_NJFET_DSG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57587FC4</tstamp>
+    </comp>
+    <comp ref="Q4">
+      <value>MMBFJ310</value>
+      <footprint>HERMESLITE_PA6:SOT23-123</footprint>
+      <libsource lib="device" part="Q_NJFET_DSG"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57587FD1</tstamp>
+    </comp>
+    <comp ref="C28">
+      <value>30p</value>
+      <footprint>HERMESLITE_PA6:TC_TZ03</footprint>
+      <libsource lib="device" part="CTRIM"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57587FE4</tstamp>
+    </comp>
+    <comp ref="C9">
+      <value>30p</value>
+      <footprint>HERMESLITE_PA6:TC_TZ03</footprint>
+      <libsource lib="device" part="CTRIM"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57587FEB</tstamp>
+    </comp>
+    <comp ref="C15">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57587FF2</tstamp>
+    </comp>
+    <comp ref="C12">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57587FF9</tstamp>
+    </comp>
+    <comp ref="C8">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57588000</tstamp>
+    </comp>
+    <comp ref="C13">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57588007</tstamp>
+    </comp>
+    <comp ref="C32">
+      <value>27p</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5758800E</tstamp>
+    </comp>
+    <comp ref="L1">
+      <value>T37-10</value>
+      <footprint>HERMESLITE_PA6:T37_TP</footprint>
+      <libsource lib="hermeslite6" part="INDUCTOR_tap"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57588015</tstamp>
+    </comp>
+    <comp ref="L3">
+      <value>T37-10</value>
+      <footprint>HERMESLITE_PA6:T37_SL</footprint>
+      <libsource lib="device" part="INDUCTOR"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5758801C</tstamp>
+    </comp>
+    <comp ref="R14">
+      <value>33</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57588024</tstamp>
+    </comp>
+    <comp ref="C14">
+      <value>33p</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5758804C</tstamp>
+    </comp>
+    <comp ref="C29">
+      <value>33p</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57588059</tstamp>
+    </comp>
+    <comp ref="C30">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57588076</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>CDSOD323-T05LC</value>
+      <footprint>HERMESLITE:SOD323</footprint>
+      <libsource lib="hermeslite" part="DIODESCH2"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57588084</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>330n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575880C8</tstamp>
+    </comp>
+    <comp ref="U3">
+      <value>PE4259</value>
+      <footprint>HERMESLITE:pe4259</footprint>
+      <libsource lib="hermeslite6" part="PE4259"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575880DD</tstamp>
+    </comp>
+    <comp ref="U4">
+      <value>PE4259</value>
+      <footprint>HERMESLITE:pe4259</footprint>
+      <libsource lib="hermeslite6" part="PE4259"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575880E4</tstamp>
+    </comp>
+    <comp ref="C4">
+      <value>10u/10V</value>
+      <footprint>HERMESLITE_PA6:TantalC_SizeA_EIA-3216_Wave</footprint>
+      <libsource lib="device" part="CP1"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575880EC</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>AN77L03M</value>
+      <footprint>HERMESLITE_PA6:SOT89-3_Housing</footprint>
+      <libsource lib="regul" part="LM2931AZ-3.3/5.0"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575880F3</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>1N5819</value>
+      <footprint>HERMESLITE_PA6:DO-214AC(SMA)_12Swap</footprint>
+      <libsource lib="device" part="D"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57592827</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>10n</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57596E25</tstamp>
+    </comp>
+    <comp ref="R12">
+      <value>DNI</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="R-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5759DE1E</tstamp>
+    </comp>
+    <comp ref="C16">
+      <value>DNI</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5759DFBC</tstamp>
+    </comp>
+    <comp ref="R13">
+      <value>DNI</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="R-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575A25A5</tstamp>
+    </comp>
+    <comp ref="C17">
+      <value>DNI</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575A25AB</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>TA76431F</value>
+      <footprint>HERMESLITE_PA6:SOT89-3_Housing</footprint>
+      <libsource lib="hermeslite6" part="TA76431F"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5758A692</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>560</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="R-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5758A998</tstamp>
+    </comp>
+    <comp ref="K1">
+      <value>EA2</value>
+      <footprint>HERMESLITE_PA6:Relay_EA2</footprint>
+      <libsource lib="hermeslite6" part="RELAY_EA2"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575A553F</tstamp>
+    </comp>
+    <comp ref="C37">
+      <value>DNI</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575C13B8</tstamp>
+    </comp>
+    <comp ref="C34">
+      <value>DNI</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575C195F</tstamp>
+    </comp>
+    <comp ref="P6">
+      <value>GND</value>
+      <footprint>HERMESLITE_PA6:Measurement_Point_Round-SMD-Pad_Small</footprint>
+      <libsource lib="device" part="TST"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575A2E41</tstamp>
+    </comp>
+    <comp ref="P5">
+      <value>GND</value>
+      <footprint>HERMESLITE_PA6:Measurement_Point_Round-SMD-Pad_Small</footprint>
+      <libsource lib="device" part="TST"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575A2F42</tstamp>
+    </comp>
+    <comp ref="P3">
+      <value>Controlled PWR</value>
+      <footprint>HERMESLITE_PA6:JST_EH_3P</footprint>
+      <libsource lib="conn" part="CONN_01X03"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575A4AE1</tstamp>
+    </comp>
+    <comp ref="P4">
+      <value>PreAMP</value>
+      <footprint>HERMESLITE_PA6:JST_EH_3P</footprint>
+      <libsource lib="conn" part="CONN_01X03"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575A593D</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>10k</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575A80BD</tstamp>
+    </comp>
+    <comp ref="L6">
+      <value>T37-6</value>
+      <footprint>HERMESLITE_PA6:T37_SL</footprint>
+      <libsource lib="device" part="INDUCTOR"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575ADA50</tstamp>
+    </comp>
+    <comp ref="C42">
+      <value>30p</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575ADA57</tstamp>
+    </comp>
+    <comp ref="C41">
+      <value>30p</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575ADA63</tstamp>
+    </comp>
+    <comp ref="C40">
+      <value>DNI</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575ADA70</tstamp>
+    </comp>
+    <comp ref="C20">
+      <value>22u</value>
+      <footprint>HERMESLITE_PA6:C_1206</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575A35ED</tstamp>
+    </comp>
+    <comp ref="C21">
+      <value>22u</value>
+      <footprint>HERMESLITE_PA6:C_1206</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575A3742</tstamp>
+    </comp>
+    <comp ref="C24">
+      <value>22u</value>
+      <footprint>HERMESLITE_PA6:C_1206</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575A4284</tstamp>
+    </comp>
+    <comp ref="C25">
+      <value>22u</value>
+      <footprint>HERMESLITE_PA6:C_1206</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575A44FC</tstamp>
+    </comp>
+    <comp ref="C36">
+      <value>DNI</value>
+      <footprint>HERMESLITE_PA6:C_0805_HandSoldering</footprint>
+      <libsource lib="amp-rescue" part="C-RESCUE-amp"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575A836C</tstamp>
+    </comp>
+    <comp ref="L2">
+      <value>BN43-2402</value>
+      <footprint>HERMESLITE_PA6:BN43-2402_Choke</footprint>
+      <libsource lib="device" part="INDUCTOR"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>575B83EF</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="conn" part="BNC">
+      <footprints>
+        <fp>BNC_*</fp>
+        <fp>bnc</fp>
+        <fp>bnc-*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">BNC</field>
+      </fields>
+      <pins>
+        <pin num="1" name="In" type="passive"/>
+        <pin num="2" name="Ext" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="C">
+      <description>Unpolarized capacitor</description>
+      <footprints>
+        <fp>C?</fp>
+        <fp>C_????_*</fp>
+        <fp>C_????</fp>
+        <fp>SMD*_c</fp>
+        <fp>Capacitor*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="amp-rescue" part="C-RESCUE-amp">
+      <footprints>
+        <fp>SM*</fp>
+        <fp>C?</fp>
+        <fp>C1-1</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C-RESCUE-amp</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="CONN_01X02">
+      <description>Connector 01x02</description>
+      <footprints>
+        <fp>Pin_Header_Straight_1X02</fp>
+        <fp>Pin_Header_Angled_1X02</fp>
+        <fp>Socket_Strip_Straight_1X02</fp>
+        <fp>Socket_Strip_Angled_1X02</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X02</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="CONN_01X03">
+      <description>Connector 01x03</description>
+      <footprints>
+        <fp>Pin_Header_Straight_1X03</fp>
+        <fp>Pin_Header_Angled_1X03</fp>
+        <fp>Socket_Strip_Straight_1X03</fp>
+        <fp>Socket_Strip_Angled_1X03</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X03</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="CP1">
+      <description>Polarised capacitor</description>
+      <footprints>
+        <fp>SMD*_Pol</fp>
+        <fp>c_elec*</fp>
+        <fp>C*elec</fp>
+        <fp>TantalC*</fp>
+        <fp>Elko*</fp>
+        <fp>CP*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">CP1</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="CTRIM">
+      <description>Variable capacitor</description>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">CTRIM</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="D">
+      <description>Diode</description>
+      <footprints>
+        <fp>Diode_*</fp>
+        <fp>D-Pak_TO252AA</fp>
+        <fp>*SingleDiode</fp>
+        <fp>*_Diode_*</fp>
+        <fp>*SingleDiode*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="DIODESCH2">
+      <footprints>
+        <fp>D?</fp>
+        <fp>S*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">DIODESCH2</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="K" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="INDUCTOR">
+      <fields>
+        <field name="Reference">L</field>
+        <field name="Value">INDUCTOR</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite6" part="INDUCTOR_tap">
+      <description>Inductor with tap</description>
+      <fields>
+        <field name="Reference">L</field>
+        <field name="Value">INDUCTOR_tap</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="regul" part="LM2931AZ-3.3/5.0">
+      <aliases>
+        <alias>LM2931Z-3.3/5.0</alias>
+      </aliases>
+      <description>LM2931, 100mA Low drop-out regulator, Fixed Output 3.3V, 5V</description>
+      <docs>http://www.ti.com/lit/ds/symlink/lm2931-n.pdf</docs>
+      <footprints>
+        <fp>TO92-123</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LM2931AZ-3.3/5.0</field>
+        <field name="Footprint">TO92-123</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VO" type="power_out"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="VI" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite6" part="PE4259">
+      <description>RF Switch</description>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">PE4259</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="input"/>
+        <pin num="2" name="~" type="input"/>
+        <pin num="3" name="~" type="input"/>
+        <pin num="4" name="~" type="input"/>
+        <pin num="5" name="~" type="input"/>
+        <pin num="6" name="~" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="POT">
+      <description>Potentionmetre</description>
+      <fields>
+        <field name="Reference">RV</field>
+        <field name="Value">POT</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="Q_NJFET_DSG">
+      <description>Transistor N-JFET (general)</description>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">Q_NJFET_DSG</field>
+      </fields>
+      <pins>
+        <pin num="1" name="D" type="passive"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="G" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="R">
+      <description>Resistor</description>
+      <footprints>
+        <fp>R_*</fp>
+        <fp>Resistor_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="amp-rescue" part="R-RESCUE-amp">
+      <footprints>
+        <fp>R?</fp>
+        <fp>SM0603</fp>
+        <fp>SM0805</fp>
+        <fp>R?-*</fp>
+        <fp>SM1206</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R-RESCUE-amp</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite" part="RD16HHF1">
+      <aliases>
+        <alias>MOSFET_N</alias>
+      </aliases>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">RD16HHF1</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite6" part="RELAY_EA2">
+      <description>Relay</description>
+      <fields>
+        <field name="Reference">K</field>
+        <field name="Value">RELAY_EA2</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="input"/>
+        <pin num="2" name="R1" type="passive"/>
+        <pin num="3" name="C1" type="passive"/>
+        <pin num="4" name="T1" type="passive"/>
+        <pin num="7" name="T2" type="passive"/>
+        <pin num="8" name="C2" type="passive"/>
+        <pin num="9" name="R2" type="passive"/>
+        <pin num="10" name="10" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite6" part="TA76431F">
+      <description>REG</description>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TA76431F</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="input"/>
+        <pin num="2" name="A" type="input"/>
+        <pin num="3" name="R" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="hermeslite6" part="TOR2">
+      <fields>
+        <field name="Reference">T</field>
+        <field name="Value">TOR2</field>
+      </fields>
+      <pins>
+        <pin num="1" name="AA" type="passive"/>
+        <pin num="2" name="SB" type="passive"/>
+        <pin num="3" name="AB" type="passive"/>
+        <pin num="4" name="SA" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="TRANSFO">
+      <fields>
+        <field name="Reference">T</field>
+        <field name="Value">TRANSFO</field>
+      </fields>
+      <pins>
+        <pin num="1" name="AA" type="passive"/>
+        <pin num="2" name="AB" type="passive"/>
+        <pin num="3" name="SA" type="passive"/>
+        <pin num="4" name="SB" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="TST">
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">TST</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="hermeslite">
+      <uri>D:\KiCad\Hermes-Lite\PA_6m\hermeslite.lib</uri>
+    </library>
+    <library logical="hermeslite6">
+      <uri>D:\KiCad\Hermes-Lite\PA_6m\hermeslite6.lib</uri>
+    </library>
+    <library logical="amp-rescue">
+      <uri>D:\KiCad\Hermes-Lite\PA_6m\amp-rescue.lib</uri>
+    </library>
+    <library logical="device">
+      <uri>C:\Application\KiCad\share\kicad\library\device.lib</uri>
+    </library>
+    <library logical="conn">
+      <uri>C:\Application\KiCad\share\kicad\library\conn.lib</uri>
+    </library>
+    <library logical="regul">
+      <uri>C:\Application\KiCad\share\kicad\library\regul.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="Net-(C22-Pad1)">
+      <node ref="C22" pin="1"/>
+      <node ref="C24" pin="1"/>
+      <node ref="L2" pin="2"/>
+      <node ref="C23" pin="1"/>
+      <node ref="C25" pin="1"/>
+      <node ref="P7" pin="1"/>
+    </net>
+    <net code="2" name="Net-(C14-Pad1)">
+      <node ref="L1" pin="1"/>
+      <node ref="C9" pin="1"/>
+      <node ref="C14" pin="1"/>
+    </net>
+    <net code="3" name="Net-(C12-Pad1)">
+      <node ref="C12" pin="1"/>
+      <node ref="R14" pin="1"/>
+      <node ref="C8" pin="1"/>
+      <node ref="C15" pin="1"/>
+      <node ref="L1" pin="2"/>
+    </net>
+    <net code="4" name="Net-(P2-Pad1)">
+      <node ref="R2" pin="2"/>
+      <node ref="P2" pin="1"/>
+      <node ref="R1" pin="2"/>
+    </net>
+    <net code="5" name="R12V">
+      <node ref="C1" pin="1"/>
+      <node ref="L3" pin="2"/>
+      <node ref="U1" pin="3"/>
+      <node ref="P3" pin="1"/>
+      <node ref="C30" pin="1"/>
+    </net>
+    <net code="6" name="Net-(C5-Pad2)">
+      <node ref="C5" pin="2"/>
+      <node ref="T1" pin="4"/>
+    </net>
+    <net code="7" name="GND">
+      <node ref="R3" pin="1"/>
+      <node ref="R1" pin="1"/>
+      <node ref="C24" pin="2"/>
+      <node ref="C25" pin="2"/>
+      <node ref="C36" pin="2"/>
+      <node ref="C2" pin="1"/>
+      <node ref="C35" pin="2"/>
+      <node ref="R7" pin="1"/>
+      <node ref="C21" pin="2"/>
+      <node ref="C20" pin="2"/>
+      <node ref="P2" pin="2"/>
+      <node ref="VR1" pin="3"/>
+      <node ref="C31" pin="2"/>
+      <node ref="C39" pin="2"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="T1" pin="2"/>
+      <node ref="VR2" pin="3"/>
+      <node ref="T3" pin="4"/>
+      <node ref="C38" pin="2"/>
+      <node ref="C10" pin="2"/>
+      <node ref="P8" pin="2"/>
+      <node ref="P1" pin="2"/>
+      <node ref="C11" pin="2"/>
+      <node ref="Q2" pin="2"/>
+      <node ref="P7" pin="2"/>
+      <node ref="C7" pin="2"/>
+      <node ref="C18" pin="2"/>
+      <node ref="C19" pin="2"/>
+      <node ref="C33" pin="2"/>
+      <node ref="C41" pin="2"/>
+      <node ref="D2" pin="2"/>
+      <node ref="C42" pin="2"/>
+      <node ref="Q4" pin="3"/>
+      <node ref="C29" pin="2"/>
+      <node ref="C14" pin="2"/>
+      <node ref="Q3" pin="3"/>
+      <node ref="U3" pin="2"/>
+      <node ref="C1" pin="2"/>
+      <node ref="C30" pin="2"/>
+      <node ref="P3" pin="3"/>
+      <node ref="R5" pin="1"/>
+      <node ref="R14" pin="2"/>
+      <node ref="P4" pin="3"/>
+      <node ref="P5" pin="1"/>
+      <node ref="U1" pin="2"/>
+      <node ref="C4" pin="2"/>
+      <node ref="U4" pin="2"/>
+      <node ref="U2" pin="2"/>
+      <node ref="D1" pin="2"/>
+      <node ref="C23" pin="2"/>
+      <node ref="C22" pin="2"/>
+      <node ref="C8" pin="2"/>
+      <node ref="C12" pin="2"/>
+      <node ref="C15" pin="2"/>
+      <node ref="C9" pin="2"/>
+      <node ref="C28" pin="2"/>
+      <node ref="K1" pin="7"/>
+      <node ref="K1" pin="10"/>
+      <node ref="P6" pin="1"/>
+    </net>
+    <net code="8" name="Net-(C40-Pad2)">
+      <node ref="C40" pin="2"/>
+      <node ref="L6" pin="2"/>
+      <node ref="K1" pin="4"/>
+      <node ref="C41" pin="1"/>
+      <node ref="C42" pin="1"/>
+    </net>
+    <net code="9" name="Net-(R2-Pad1)">
+      <node ref="R3" pin="2"/>
+      <node ref="T1" pin="1"/>
+      <node ref="R2" pin="1"/>
+    </net>
+    <net code="10" name="Net-(C26-Pad2)">
+      <node ref="T3" pin="1"/>
+      <node ref="C26" pin="2"/>
+    </net>
+    <net code="11" name="Net-(C11-Pad1)">
+      <node ref="R9" pin="2"/>
+      <node ref="C11" pin="1"/>
+      <node ref="VR2" pin="2"/>
+    </net>
+    <net code="12" name="Net-(C27-Pad2)">
+      <node ref="C27" pin="2"/>
+      <node ref="T3" pin="2"/>
+    </net>
+    <net code="13" name="Net-(C6-Pad1)">
+      <node ref="C6" pin="1"/>
+      <node ref="T1" pin="3"/>
+    </net>
+    <net code="14" name="Net-(Q2-Pad1)">
+      <node ref="R13" pin="2"/>
+      <node ref="Q2" pin="1"/>
+      <node ref="R11" pin="1"/>
+    </net>
+    <net code="15" name="Net-(C16-Pad2)">
+      <node ref="C16" pin="2"/>
+      <node ref="C26" pin="1"/>
+      <node ref="T2" pin="2"/>
+      <node ref="Q1" pin="3"/>
+    </net>
+    <net code="16" name="Net-(Q1-Pad1)">
+      <node ref="R10" pin="1"/>
+      <node ref="R12" pin="2"/>
+      <node ref="Q1" pin="1"/>
+    </net>
+    <net code="17" name="Net-(U3-Pad3)">
+      <node ref="U3" pin="3"/>
+      <node ref="U4" pin="3"/>
+    </net>
+    <net code="18" name="Net-(C18-Pad1)">
+      <node ref="T2" pin="1"/>
+      <node ref="C20" pin="1"/>
+      <node ref="C21" pin="1"/>
+      <node ref="L2" pin="1"/>
+      <node ref="T2" pin="4"/>
+      <node ref="C18" pin="1"/>
+      <node ref="C19" pin="1"/>
+    </net>
+    <net code="19" name="Net-(C10-Pad1)">
+      <node ref="C10" pin="1"/>
+      <node ref="VR1" pin="2"/>
+      <node ref="R8" pin="1"/>
+    </net>
+    <net code="20" name="Net-(P8-Pad1)">
+      <node ref="U4" pin="5"/>
+      <node ref="P8" pin="1"/>
+    </net>
+    <net code="21" name="Net-(C32-Pad1)">
+      <node ref="C32" pin="1"/>
+      <node ref="U4" pin="1"/>
+    </net>
+    <net code="22" name="Net-(C13-Pad2)">
+      <node ref="U3" pin="1"/>
+      <node ref="C13" pin="2"/>
+    </net>
+    <net code="23" name="Net-(C3-Pad2)">
+      <node ref="C3" pin="2"/>
+      <node ref="U3" pin="5"/>
+      <node ref="D2" pin="1"/>
+    </net>
+    <net code="24" name="Net-(P4-Pad2)">
+      <node ref="U4" pin="4"/>
+      <node ref="P4" pin="2"/>
+      <node ref="R5" pin="2"/>
+      <node ref="U3" pin="4"/>
+    </net>
+    <net code="25" name="Net-(C3-Pad1)">
+      <node ref="C3" pin="1"/>
+      <node ref="K1" pin="8"/>
+    </net>
+    <net code="26" name="Net-(K1-Pad2)">
+      <node ref="K1" pin="2"/>
+      <node ref="K1" pin="9"/>
+    </net>
+    <net code="27" name="Net-(K1-Pad3)">
+      <node ref="K1" pin="3"/>
+      <node ref="P1" pin="1"/>
+    </net>
+    <net code="28" name="Net-(C17-Pad2)">
+      <node ref="C17" pin="2"/>
+      <node ref="C27" pin="1"/>
+      <node ref="Q2" pin="3"/>
+      <node ref="T2" pin="3"/>
+    </net>
+    <net code="29" name="Net-(C5-Pad1)">
+      <node ref="R10" pin="2"/>
+      <node ref="R8" pin="2"/>
+      <node ref="C5" pin="1"/>
+    </net>
+    <net code="30" name="Net-(C6-Pad2)">
+      <node ref="R9" pin="1"/>
+      <node ref="C6" pin="2"/>
+      <node ref="R11" pin="2"/>
+    </net>
+    <net code="31" name="Net-(C37-Pad2)">
+      <node ref="L6" pin="1"/>
+      <node ref="C37" pin="2"/>
+      <node ref="L5" pin="2"/>
+      <node ref="C38" pin="1"/>
+      <node ref="C40" pin="1"/>
+      <node ref="C39" pin="1"/>
+    </net>
+    <net code="32" name="Net-(C31-Pad1)">
+      <node ref="C34" pin="1"/>
+      <node ref="T3" pin="3"/>
+      <node ref="C31" pin="1"/>
+      <node ref="C33" pin="1"/>
+      <node ref="L4" pin="1"/>
+    </net>
+    <net code="34" name="Net-(C34-Pad2)">
+      <node ref="C37" pin="1"/>
+      <node ref="C36" pin="1"/>
+      <node ref="C34" pin="2"/>
+      <node ref="L4" pin="2"/>
+      <node ref="L5" pin="1"/>
+      <node ref="C35" pin="1"/>
+    </net>
+    <net code="35" name="Net-(R6-Pad1)">
+      <node ref="R7" pin="2"/>
+      <node ref="R6" pin="1"/>
+      <node ref="U2" pin="3"/>
+    </net>
+    <net code="36" name="Net-(C17-Pad1)">
+      <node ref="C17" pin="1"/>
+      <node ref="R13" pin="1"/>
+    </net>
+    <net code="37" name="Net-(C16-Pad1)">
+      <node ref="R12" pin="1"/>
+      <node ref="C16" pin="1"/>
+    </net>
+    <net code="38" name="Net-(C7-Pad1)">
+      <node ref="U2" pin="1"/>
+      <node ref="R4" pin="1"/>
+      <node ref="VR1" pin="1"/>
+      <node ref="VR2" pin="1"/>
+      <node ref="C7" pin="1"/>
+      <node ref="R6" pin="2"/>
+    </net>
+    <net code="39" name="T12V">
+      <node ref="C2" pin="2"/>
+      <node ref="K1" pin="1"/>
+      <node ref="P3" pin="2"/>
+      <node ref="D1" pin="1"/>
+      <node ref="R4" pin="2"/>
+    </net>
+    <net code="40" name="Net-(C13-Pad1)">
+      <node ref="Q4" pin="2"/>
+      <node ref="L1" pin="3"/>
+      <node ref="C13" pin="1"/>
+      <node ref="Q3" pin="2"/>
+    </net>
+    <net code="41" name="/3V">
+      <node ref="U3" pin="6"/>
+      <node ref="P4" pin="1"/>
+      <node ref="U4" pin="6"/>
+      <node ref="C4" pin="1"/>
+      <node ref="U1" pin="1"/>
+    </net>
+    <net code="42" name="Net-(C28-Pad1)">
+      <node ref="C28" pin="1"/>
+      <node ref="L3" pin="1"/>
+      <node ref="C29" pin="1"/>
+      <node ref="C32" pin="2"/>
+      <node ref="Q3" pin="1"/>
+      <node ref="Q4" pin="1"/>
+    </net>
+  </nets>
+</export>

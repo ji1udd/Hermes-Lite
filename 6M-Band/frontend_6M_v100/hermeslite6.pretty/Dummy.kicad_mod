@@ -1,0 +1,12 @@
+(module Dummy (layer F.Cu) (tedit 5711D249)
+  (tags Dummy_Short)
+  (fp_text reference REF** (at 0 1.524) (layer F.SilkS) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_text value Dummy (at 0 -1.27) (layer F.Fab) hide
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
+  (fp_line (start -0.5715 0) (end 0.5715 0) (layer F.Cu) (width 0.78))
+  (pad 1 smd circle (at -0.5715 0) (size 0.78 0.78) (layers F.Cu F.Paste F.Mask))
+  (pad 2 smd circle (at 0.5715 0) (size 0.78 0.78) (layers F.Cu F.Paste F.Mask))
+)

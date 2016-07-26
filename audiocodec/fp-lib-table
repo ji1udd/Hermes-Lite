@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name hermeslite)(type KiCad)(uri "$(KIPRJMOD)\\hermeslite.pretty")(options "")(descr ""))
+  (lib (name hermeslite6)(type KiCad)(uri "$(KIPRJMOD)\\hermeslite6.pretty")(options "")(descr ""))
+)

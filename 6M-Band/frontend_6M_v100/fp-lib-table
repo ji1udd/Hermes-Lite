@@ -1,0 +1,5 @@
+(fp_lib_table
+  (lib (name HERMESLITE)(type KiCad)(uri ${KIPRJMOD}/hermeslite.pretty)(options "")(descr ""))
+  (lib (name OSHW)(type Legacy)(uri ${KIPRJMOD}/OSHW-logo.mod)(options "")(descr ""))
+  (lib (name HERMESLITE_FE6)(type KiCad)(uri ${KIPRJMOD}/hermeslite6.pretty)(options "")(descr ""))
+)
