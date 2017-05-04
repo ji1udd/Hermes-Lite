@@ -977,7 +977,7 @@ generate	// generate the receivers after the first
     
 `ifdef FULLDUPLEX
 
-if((c==3 && NR>3))// || (c==1 && NR<=3))
+if((c==3 && NR>3) || (c==1 && NR<=3))
 begin
 //    wire signed [23:0] psout_data_I2;
 //   wire signed [23:0] psout_data_Q2;
@@ -2174,7 +2174,8 @@ always @ (posedge ad9866spiclk)
 
 assign ad9866rqst = dd != lastdd;
 
-ad9866 #(.initarray0(initarray0), .initarray1(initarray1)) ad9866_inst(.reset(~ad9866_rst_n),.clk(ad9866spiclk),.initarray_sel(dipsw[2]),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.extrqst(ad9866rqst),.gain(dd));
+//ad9866 #(.initarray0(initarray0), .initarray1(initarray1)) ad9866_inst(.reset(~ad9866_rst_n),.clk(ad9866spiclk),.initarray_sel(dipsw[2]),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.extrqst(ad9866rqst),.gain(dd));
+ad9866 #(.initarray0(initarray0), .initarray1(initarray1)) ad9866_inst(.reset(~ad9866_rst_n),.clk(ad9866spiclk),.initarray_sel(~dipsw[1]),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.extrqst(ad9866rqst),.gain(dd));
 
 // Really 0.16 seconds at Hermes-Lite 61.44 MHz clock
 localparam half_second = 10000000; // at 48MHz clock rate

@@ -50,19 +50,17 @@ module phy_cfg(
 //-----------------------------------------------------------------------------
 //                           initialization data
 //-----------------------------------------------------------------------------
-
 //mdio register values
 wire [15:0] values [8:0];
-assign values[8] = {6'b0, allow_1Gbit, 9'b0};
+assign values[8] = {6'b0, 1'b0, 9'b0};	// {6'b0, allow_1Gbit, 9'b0};
 assign values[7] = 16'h8104;
-assign values[6] = {8'hc0, 8'h77};  //rx and tx clock delay, in 0.12 ns units to reg 104h, changed 25 Sept
+assign values[6] = 16'hF077;	// RxC and TxC delay max, Rx_CTL and Tx_CTL delay min, reg 104h
 assign values[5] = 16'h8105;
-assign values[4] = 16'h0000;			// no Rx pad skews, reg 105h		
+assign values[4] = 16'h0000;	// RxD delay min, reg 105h
 assign values[3] = 16'h8106;
-assign values[2] = 16'h7777;			// no Tx pad skews, reg 106h, added 25th Sept
+assign values[2] = 16'h7777;	// TxD delay min, reg 106h
 assign values[1] = 16'h1300;
 assign values[0] = 16'hxxxx;
-
 
 //mdio register addresses 
 wire [4:0] addresses [8:0];
@@ -74,14 +72,9 @@ assign addresses[4] = 12;
 assign addresses[3] = 11;
 assign addresses[2] = 12;
 assign addresses[1] = 0;
-assign addresses[0] = 31; 
+assign addresses[0] = 31;
 
 reg [3:0] word_no; 
-
-
-
-
-
 
 //-----------------------------------------------------------------------------
 //                            state machine
@@ -112,11 +105,11 @@ always @(posedge clock)
         begin
         speed <= rd_data[6:5];
         duplex <= rd_data[3];
-        
+
         if (init_required)
           begin
           wr_request <= 1;
-          word_no <= 8;
+          word_no <= 8;				// initial
           last_allow_1Gbit <= allow_1Gbit;
           state  <= WRITING;
           init_required <= 0;

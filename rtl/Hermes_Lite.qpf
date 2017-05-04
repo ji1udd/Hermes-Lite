@@ -19,17 +19,17 @@
 #
 # Quartus Prime
 # Version 16.0.0 Build 211 04/27/2016 SJ Lite Edition
-# Date created = 17:09:01  May 22, 2016
+# Date created = 06:20:46  April 22, 2017
 #
 # -------------------------------------------------------------------------- #
 
 QUARTUS_VERSION = "16.0"
-DATE = "17:09:01  May 22, 2016"
+DATE = "06:20:46  April 22, 2017"
 
 # Revisions
 
-PROJECT_REVISION = "Hermes_Lite_FD_12CVA9"
 PROJECT_REVISION = "Hermes_Lite_12CVA9"
+PROJECT_REVISION = "Hermes_Lite_FD_12CVA9"
 PROJECT_REVISION = "Hermes_Lite_FD_12CVC8"
 PROJECT_REVISION = "Hermes_Lite_12SDK"
 PROJECT_REVISION = "Hermes_Lite_FD_12CV"

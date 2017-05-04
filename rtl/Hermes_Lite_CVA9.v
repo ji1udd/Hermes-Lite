@@ -20,7 +20,7 @@
 
 module Hermes_Lite(
 	input clk50mhz,
-	input exp_present,
+//	input exp_present,
 	input AD9866clk,
 	input clk,
  	input extreset,
@@ -35,6 +35,7 @@ module Hermes_Lite(
 
 	// AD9866
 	output [5:0] ad9866_pga,
+
 `ifdef FULLDUPLEX
 	input [5:0] ad9866_rx,
 (* useioff = 1 *) output [5:0] ad9866_tx,
@@ -49,6 +50,7 @@ module Hermes_Lite(
 	output ad9866_txen,
 	output ad9866_txclk,
 `endif
+
 	output ad9866_sclk,
     output ad9866_sdio,
     input  ad9866_sdo,
@@ -79,16 +81,17 @@ module Hermes_Lite(
 // Ethernet Interface
 // 5c release, 4a testing
 parameter MAC = {8'h00,8'h1c,8'hc0,8'ha2,8'h22,8'hdd};
-parameter IP = {8'd0,8'd0,8'd0,8'd0};
+//parameter IP = {8'd0,8'd0,8'd0,8'd0};
+parameter IP = {8'd192,8'd168,8'd0,8'd100};
 
 // Clock Frequency
 //parameter CLK_FREQ = 61440000;
 parameter CLK_FREQ = 73728000;
 
 // Number of Receivers
-parameter NR = 3; // number of receivers to implement
+parameter NR = 8'd3; // number of receivers to implement
 
-parameter GIGABIT = 1;
+parameter GIGABIT = 0;
 
 
 

@@ -45,7 +45,7 @@ module network (
 	output udp_tx_active,
 	output [47:0] local_mac,
 	output broadcast,
-	output IP_write_done,
+//	output IP_write_done,
 	output [15:0]to_port,
 	output dst_unreachable,
 
@@ -77,10 +77,10 @@ module network (
   inout  PHY_MDIO,             
   output PHY_MDC,           
   
-  output SCK,                  
-  output SI,                   
-  input  SO,                   
-  output CS,
+//  output SCK,                  
+//  output SI,                   
+//  input  SO,                   
+//  output CS,
 
   input MODE2
   );
@@ -169,7 +169,8 @@ always @(negedge clock_2_5MHz)
       //wait for phy to initialize and connect
       ST_PHY_CONNECT: 
         if (phy_connected) begin
-          settle_cnt <= 22'd2500000; //1 second
+//        settle_cnt <= 22'd2500000; //1 second
+          settle_cnt <= 22'd250000;  //100ms
           state <= ST_PHY_SETTLE;
          end
         
@@ -264,8 +265,8 @@ assign local_mac =  {MAC[47:2],~macbit,MAC[0]};
 reg [14:0] eepromcnt; 
 
 always @(posedge clock_2_5MHz or negedge rst_n) begin
-  if (~rst_n) eepromcnt <= 0;
-  else if (~(&eepromcnt)) eepromcnt <= eepromcnt + 1;
+  if (~rst_n) eepromcnt <= 15'b0;
+  else if (~(&eepromcnt)) eepromcnt <= eepromcnt + 1'b1;
 end
 
 assign eeprom_ready = &eepromcnt[14:11];

@@ -191,7 +191,7 @@ always @(posedge clk, posedge reset) begin: AD9866_DUT2_FSM
                 end
                 else begin
                     dut2_data <= {dut2_data[15-1:0], sdo};
-                    dut2_bitcount <= (dut2_bitcount - 1);
+                    dut2_bitcount <= (dut2_bitcount - 1'b1);
                     sclk <= 0;
                     if ((dut2_bitcount == 0)) begin
                         dut2_state <= 1'b0;

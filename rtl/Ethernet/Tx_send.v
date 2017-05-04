@@ -32,7 +32,7 @@ module Tx_send (
 	input IP_valid,
 	input [7:0] Hermes_serialno,
 	input IDHermesLite,
-	input  [8:0]AssignNR,
+	input  [7:0]AssignNR,
 
 	input [7:0] PHY_Tx_data,
 	input [10:0] PHY_Tx_rdused,

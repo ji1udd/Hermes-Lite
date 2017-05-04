@@ -49,7 +49,7 @@ begin
 	pb_history <= {pb_history[2:0], pb};
 	
 	if (pb_history[3] != pb_history[2])
-		count <= 1'b0;
+		count <= 19'b0;
 	else if(count[counter_bits])
 		clean_pb <= pb_history[3];
 	else

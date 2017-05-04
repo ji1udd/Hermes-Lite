@@ -35,7 +35,7 @@ module ethernet (
 	input  PHY_RX_CLOCK,                           
 	output PHY_RESET_N,
 	inout  PHY_MDIO,             
-	output PHY_MDC       
+	output PHY_MDC
 );
 
 
@@ -76,7 +76,7 @@ network #(.MAC(MAC), .IP(IP)) network_inst(
 	.udp_tx_data(udp_tx_data),
 	.udp_tx_enable(udp_tx_enable),
 	.udp_tx_active(udp_tx_active),
-	.speed(1'b1),
+	.speed(1'b0),
 	.set_ip(1'b0),
 	.assign_ip(32'h00000000),
 	.port_ID(8'h00),
@@ -107,8 +107,8 @@ network #(.MAC(MAC), .IP(IP)) network_inst(
     .PHY_MDIO(PHY_MDIO),             
   	.PHY_MDC(PHY_MDC),           
   
-  	.SO(1'b0),                  
-  	.MODE2(1'b1),
+//	.SO(1'b0),                  
+	.MODE2(1'b0),			// 100M Aug.2016
   	.network_status(network_status),
   	.network_state(network_state)
 );

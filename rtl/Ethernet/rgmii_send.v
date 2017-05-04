@@ -1,7 +1,7 @@
 //
 //  HPSDR - High Performance Software Defined Radio
 //
-//  Metis code. 
+//  Metis code.
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -22,30 +22,30 @@
 
 
 module rgmii_send (
-  input speed_1Gbit, 
+  input speed_1Gbit,
   input [7:0] data,
-  input tx_enable,   
-  output active,  
-  output clock, 
+  input tx_enable,
+  output active,
+  output clock,
   output clock_2_5MHz,
   output clock_12_5MHz,
-  
+
   //hardware pins
   output [3:0]PHY_TX,
-  output PHY_TX_EN,              
-  output PHY_TX_CLOCK,    
-  input  PHY_CLK125,   
-  input  PHY_INT_N,              
+  output PHY_TX_EN,
+  output PHY_TX_CLOCK,
+  input  PHY_CLK125,
+  input  PHY_INT_N,
   output PHY_RESET_N
   );
-  
 
-  
-  
-//-----------------------------------------------------------------------------  
+
+
+
+//-----------------------------------------------------------------------------
 //                              clocks
 //-----------------------------------------------------------------------------
-wire clock_125_mhz_0_deg, clock_125_mhz_90_deg;
+//wire clock_25MHz_180deg;
   
 //tx_pll	tx_pll_inst (
 //	.inclk0 (PHY_CLK125),
@@ -56,38 +56,32 @@ wire clock_125_mhz_0_deg, clock_125_mhz_90_deg;
 //	);
 
 phyclocks phyclocks_inst (
-    .refclk   (PHY_CLK125),   //  refclk.clk
-    .rst      (1'b0),      //   reset.reset
-    .outclk_0 (clock_125_mhz_0_deg), // outclk0.clk
-    .outclk_1 (clock_125_mhz_90_deg), // outclk1.clk
-    .outclk_2 (clock_12_5MHz), // outclk2.clk
-    .outclk_3 (clock_2_5MHz) // outclk3.clk
-);   
- 
+    .refclk   (PHY_CLK125),			// 50MHz
+    .rst      (1'b0),					// reset.reset
+//  .outclk_0 (clock_25MHz_180deg),	// 25MHz 180deg
+    .outclk_0 (PHY_TX_CLOCK),			// 25MHz 180deg
+    .outclk_1 (clock_12_5MHz),		// 12.5MHz 0deg
+    .outclk_2 (clock_2_5MHz)			//  2.5MHz 0deg
+);
 
-assign clock = clock_125_mhz_0_deg;
-assign PHY_TX_CLOCK = clock_125_mhz_90_deg;
+assign clock = clock_12_5MHz ;							// 12.5MHz 0deg
 
 
- 
-
-
- 
-//-----------------------------------------------------------------------------  
+//-----------------------------------------------------------------------------
 //                            shift reg
 //-----------------------------------------------------------------------------
 localparam PREAMBLE_BYTES = 64'h55555555555555D5;
 localparam PREAMB_LEN = 4'd8;
 localparam HI_BIT = 8*PREAMB_LEN - 1;
-reg [HI_BIT:0] shift_reg;  
+reg [HI_BIT:0] shift_reg;
 reg [3:0] bytes_left;
 
 
 
 
-  
-  
-//-----------------------------------------------------------------------------  
+
+
+//-----------------------------------------------------------------------------
 //                           state machine
 //-----------------------------------------------------------------------------
 localparam ST_IDLE = 1, ST_SEND = 2, ST_GAP = 4;
@@ -106,7 +100,7 @@ always @(posedge clock)
 
   case (state)
     ST_IDLE:
-      //receiving the first payload byte 
+      //receiving the first payload byte
       if (tx_enable) state <= ST_SEND;
 
     ST_SEND:
@@ -116,30 +110,29 @@ always @(posedge clock)
       else if (bytes_left != 0) bytes_left <= bytes_left - 4'd1;
       //starting inter-frame gap
       else begin bytes_left <= 4'd12; state <= ST_GAP; end
-      
+
     ST_GAP:
       if (bytes_left != 0) bytes_left <= bytes_left - 4'd1;
       else state <= ST_IDLE;
     endcase
   end
-  
-  
 
 
 
-  
-//-----------------------------------------------------------------------------  
+
+
+
+//-----------------------------------------------------------------------------
 //                             output
 //-----------------------------------------------------------------------------
 ddio_out	ddio_out_inst (
 	.datain_h({sending, shift_reg[HI_BIT-4 -: 4]}),
-	.datain_l({sending, shift_reg[HI_BIT -: 4]}),   
+	.datain_l({sending, shift_reg[HI_BIT -: 4]}),
 	.outclock(clock),
 	.dataout({PHY_TX_EN, PHY_TX})
-	);  
+	);
 
-   
-  
-  
+
+
+
 endmodule
-  
