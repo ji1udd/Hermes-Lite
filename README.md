@@ -22,7 +22,7 @@ I got very good result. Here is the output power and IMD3 of 6M Test Frontend.
 
 This application takes advantage of 1st image signal ( Fs-Ftx ). 
 Therefore, AD9866 interpolation should be off (1x).   
-![Expected 6m Frontend output](6M-Band/frontend_6M_v100/docs/Expected 6m Frontend output.png)
+![Expected 6m Frontend output](6M-Band/frontend_6M_v100/docs/Expected_6m_Frontend_output.png)
 
 Other unnecessary spurs (e.g. 2Ftx) should be care.
 In case of Hermes-Lite v1.22,  Fs is 73.728MHz. 2Ftx is out of 6M band. 2Ftx spur can be rejected by BPF perfectly.  
