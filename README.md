@@ -1,5 +1,5 @@
-#<Font color="blue">ji1udd Hermes-Lite Enhancement</font>
-##6M Frontend using undersampling technique  
+# <Font color="blue"> ji1udd Hermes-Lite Enhancement </font>
+## 6M Frontend using undersampling technique  
 Hermes-Lite v1.22 covers HF all bands.
 Its sampling frequency(Fs) is 73.728MHz and the first nyquist zone is under 36.764MHz.
 Hermes-Lite is a good performance system, but It does not support 6M band. 
@@ -37,7 +37,7 @@ For more detail, refer to [_6M Support thread_](https://groups.google.com/forum/
 
 
 
-##Frontend v1.42 experiment with balanced 6M BPF.
+## Frontend v1.42 experiment with balanced 6M BPF.
 I converted the single-ended 6M BPF that is used on 6M Frontend board to balanced-ended's in order to apply to Frontend v1.42 circuit.
 
 ![V1.42 6M Frontend](6M-Band/frontend_v142_with_6M_filter/docs/01_Frontend142_with_6MbalancedFilter.jpg)
@@ -50,7 +50,7 @@ I got the almost same result as 6M Frontend.
 More result is [_here_.](6M-Band/frontend_v142_with_6M_filter/docs/6m_Spur_v142_and_orignal.pdf)
 
 
-##Undersampling 6M transceiver (World's 1st?)
+## Undersampling 6M transceiver (World's 1st?)
 I made 6M transceiver using 6M Frontend. I added my new 6M power amplifier board. Its output power is 3W in CW.
 In SSB mode, the output power should be kept under 1W for good IMD3 (under -35dBc) by adjusting Drive Level (TxPGA).
 Rx Pre Amplifier on the schematic is not needed by adjusting AD9866 RxPGA.
@@ -62,7 +62,7 @@ Rx Pre Amplifier on the schematic is not needed by adjusting AD9866 RxPGA.
 
 
 
-##Audio Codec
+## Audio Codec
 As I have a sound trouble when PowerSDR VAC is used on my Windows8.1 PC, I added an external audio codec as a solid countermeasure.  
 I got the audio codec information from [_ik1xpv web site_](http://www.steila.com/blog/index.php?controller=post&action=view&id_post=4).
 
@@ -79,14 +79,14 @@ Now, PowerSDR and piHPSDR works well with this audio codec board.
 ![piHPSDR](audiocodec/docs/piHPSDR_TestFrontendv1.2_AudioCodec.JPG) 
 
 
-##Iambic keyer
+## Iambic keyer
 I implemented  Iambic keyer functions that PowerSDR supports, except Keyer Mode-B. 
 I implemented Keyer practice mode(Keyer is active, but does not transmit) instead of Mode-B. 
 The keyer that I scratch built needs only 150 ALMs, 1 DSP block, 8K Byte block memory.
 
 ![Keyer](audiocodec/docs/6MTRX_Keyer_AudioCodec.jpg)  
 
-###Supported functions
+### Supported functions
 - Variable Sidetone frequency :  
 Sidetone is always synchronized with receiver pitch. I added two new ways of sidetone output.   
 1) Square wave output for inexpensive piezo sounder.  
@@ -106,5 +106,9 @@ CW delay Key-Down,Reverse Paddles,Weight
 Verilog-HDL code was released on my git (27 July 2016).  
 
 
+## Bemicro CVA9 100Base-TX connection
+I modified the Hermes-Lite v1.22 firmware for connecting to Raspberry Pi / PiHPSDR directly. 
 
+![CVA9-100Base-TX](docs/HL1.22-CVA9_100Base-TX.jpg)
 
+Verilog-HDL code was released on [_CVA9-100Base-TX branch_](https://github.com/ji1udd/Hermes-Lite/tree/CVA9-100Base-TX) (5 May 2017). 
