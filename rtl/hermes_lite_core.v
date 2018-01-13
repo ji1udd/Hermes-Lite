@@ -1712,6 +1712,7 @@ reg   [6:0] Alex_manual_LPF;        // Alex LPF relay selection in manual mode
 reg   [5:0] Alex_manual_HPF;        // Alex HPF relay selection in manual mode
 reg   [4:0] Hermes_atten;           // 0-31 dB Heremes attenuator value
 reg         Hermes_atten_enable; // enable/disable bit for Hermes attenuator
+reg         HLv2_mode;              // 1: HLv2 compatible  0: Origianl HLv1 compatible
 reg         TR_relay_disable;       // Alex T/R relay disable option
 reg         IF_Pure_signal;              // 
 reg   [3:0]  IF_Predistortion;              // 
@@ -1754,6 +1755,7 @@ begin
      IF_Line_In_Gain      <= 5'b0;     // default line-in gain at min
      Hermes_atten         <= 5'b0;     // default zero input attenuation
      Hermes_atten_enable <= 1'b0;       // default disable Hermes attenuator
+     HLv2_mode           <= 1'b0;      // default HLv1 mode
      IF_Pure_signal      <= 1'b0;      // default disable pure signal
      IF_Predistortion    <= 4'b0000;   // default disable predistortion
      IF_VNA_count       <= 16'd0;		// number of points when the FPGA scans the VNA frequencies
@@ -1804,6 +1806,7 @@ begin
       IF_Pure_signal    <= IF_Rx_ctrl_2[6];       // decode pure signal setting
         Hermes_atten      <= IF_Rx_ctrl_4[4:0];    // decode input attenuation setting
       Hermes_atten_enable <= IF_Rx_ctrl_4[5];    // decode Hermes attenuator enable/disable
+      HLv2_mode           <= IF_Rx_ctrl_4[6];    // 1: HLv2 compatible  0: Origianl HLv1 compatible
     end
      if (IF_Rx_ctrl_0[7:1] == 7'b0101_011)
     begin
@@ -1900,10 +1903,10 @@ assign FPGA_PTT = IF_Rx_ctrl_0[0] | cwkey | clean_ptt; // IF_Rx_ctrl_0 only upda
 wire [5:0] gain_value;
 reg [5:0] ad9866_pga_d;
 
-assign gain_value = {~IF_DITHER, ~Hermes_atten};
+assign gain_value = HLv2_mode ? {Hermes_atten_enable, Hermes_atten} : {~IF_DITHER, ~Hermes_atten};
 
 wire [5:0] igain_value;
-assign igain_value = IF_RAND ? agc_value : gain_value;
+assign igain_value = (~HLv2_mode & IF_RAND) ? agc_value : gain_value;
 
 
 always @(posedge AD9866clkX1) begin
