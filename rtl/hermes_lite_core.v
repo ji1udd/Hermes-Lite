@@ -92,14 +92,7 @@ module hermes_lite_core(
     output ADCMOSI,                
     output ADCCLK,
     input  ADCMISO,
-    output nADCCS,
-
-    //  External AMP Band Control
-    output  uart_txd,
-
-    //  External ATU Control
-    input  ATU_Status,
-    output ATU_Start
+    output nADCCS
 );
 
 // PARAMETERS
@@ -1711,7 +1704,6 @@ reg   [7:0] IF_Drive_Level;         // Tx drive level
 reg         IF_Mic_boost;           // Mic boost 0 = 0dB, 1 = 20dB
 reg         IF_Line_In;             // Selects input, mic = 0, line = 1
 reg   [4:0] IF_Line_In_Gain;        // Sets Line-In Gain value (00000=-32.4 dB to 11111=+12 dB in 1.5 dB steps)
-reg         IF_autoTune;            // Apollo auto-tune
 reg         IF_Apollo;              // Selects Alex (0) or Apollo (1)
 reg             VNA;                        // Selects VNA mode when set. 
 reg        Alex_manual;             // set if manual selection of Alex relays active
@@ -1753,7 +1745,7 @@ begin
      IF_Line_In           <= 1'b0;      // select Mic input, not Line in
 //   IF_Filter            <= 1'b0;      // Apollo filter disabled (bypassed)
 //   IF_Tuner             <= 1'b0;      // Apollo tuner disabled (bypassed)
-     IF_autoTune          <= 1'b0;      // Apollo auto-tune disabled
+//   IF_autoTune         <= 1'b0;       // Apollo auto-tune disabled
      IF_Apollo            <= 1'b0;     //   Alex selected       
      VNA                      <= 1'b0;      // VNA disabled
      Alex_manual          <= 1'b0;      // default manual Alex filter selection (0 = auto selection, 1 = manual selection)
@@ -1798,7 +1790,7 @@ begin
       IF_Line_In          <= IF_Rx_ctrl_2[1];       // 0 = Mic input, 1 = Line In
 //    IF_Filter           <= IF_Rx_ctrl_2[2];       // 1 = enable Apollo filter
 //    IF_Tuner            <= IF_Rx_ctrl_2[3];       // 1 = enable Apollo tuner
-      IF_autoTune         <= IF_Rx_ctrl_2[4];       // 1 = begin Apollo auto-tune
+//    IF_autoTune         <= IF_Rx_ctrl_2[4];       // 1 = begin Apollo auto-tune
       IF_Apollo         <= IF_Rx_ctrl_2[5];      // 1 = Apollo enabled, 0 = Alex enabled 
       Alex_manual         <= IF_Rx_ctrl_2[6];       // manual Alex HPF/LPF filter selection (0 = disable, 1 = enable)
       VNA                     <= IF_Rx_ctrl_2[7];       // 1 = enable VNA mode
@@ -1896,8 +1888,7 @@ generate
 endgenerate
 
 
-wire mox_out;
-assign FPGA_PTT = mox_out | cwkey | clean_ptt; // IF_Rx_ctrl_0 only updated when we get correct sync sequence
+assign FPGA_PTT = IF_Rx_ctrl_0[0] | cwkey | clean_ptt; // IF_Rx_ctrl_0 only updated when we get correct sync sequence
 
 
 //------------------------------------------------------------
@@ -2234,31 +2225,5 @@ begin
 end
 endfunction
 
-
-// ============================================================================== //
-//     External Amplifier Band Control 
-// ============================================================================== //
-reg [31:0] TxFreq ;
-always @ (posedge IF_clk)
-  if (IF_Rx_save && (IF_Rx_ctrl_0[7:1]==7'b0000_001))
-    TxFreq <= {IF_Rx_ctrl_1, IF_Rx_ctrl_2, IF_Rx_ctrl_3, IF_Rx_ctrl_4} ;
-
-ExtAmp ExtAmp(
-    .clk(IF_clk),
-    .freq(TxFreq),
-    .uart_txd(uart_txd)
-);
-
-// ============================================================================== //
-//     External ATU Control 
-// ============================================================================== //
-ExtTuner ExtTuner(
-  .clk(IF_clk),
-  .auto_tune(IF_autoTune),
-  .ATU_Status(ATU_Status),
-  .ATU_Start(ATU_Start),
-  .mox_in(IF_Rx_ctrl_0[0]), // mox from PC
-  .mox_out(mox_out)
-);
 
 endmodule 

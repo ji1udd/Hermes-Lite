@@ -73,14 +73,7 @@ module Hermes_Lite(
 	output ADCMOSI,                
 	output ADCCLK,
  	input  ADCMISO,
-	output nADCCS,
-
-   // External AMP Band Control
-   output  uart_txd,
-
-   //  External ATU Control
-   input  ATU_Status,
-   output ATU_Start
+	output nADCCS
 );
 
 // PARAMETERS
@@ -88,8 +81,8 @@ module Hermes_Lite(
 // Ethernet Interface
 // 5c release, 4a testing
 parameter MAC = {8'h00,8'h1c,8'hc0,8'ha2,8'h22,8'hdd};
-parameter IP = {8'd0,8'd0,8'd0,8'd0};
-//parameter IP = {8'd192,8'd168,8'd0,8'd100};
+//parameter IP = {8'd0,8'd0,8'd0,8'd0};
+parameter IP = {8'd192,8'd168,8'd0,8'd100};
 
 // Clock Frequency
 //parameter CLK_FREQ = 61440000;
@@ -196,14 +189,7 @@ hermes_lite_core #(
 	.ADCMOSI(ADCMOSI),                
 	.ADCCLK(ADCCLK),
  	.ADCMISO(ADCMISO),
-	.nADCCS(nADCCS),
-
-    //  External AMP Band Control
-    .uart_txd(uart_txd),
-
-    //  External ATU Control
-    .ATU_Status(ATU_Status),
-    .ATU_Start(ATU_Start)
+	.nADCCS(nADCCS)	
 );             
 
 //reg clkcheck;
