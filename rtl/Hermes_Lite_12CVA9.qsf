@@ -145,6 +145,9 @@ set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to cwkey_i
 set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to ptt_i
 set_global_assignment -name ALLOW_REGISTER_MERGING OFF
 set_global_assignment -name ALLOW_REGISTER_RETIMING OFF
+set_location_assignment PIN_AA13 -to uart_txd
+set_global_assignment -name VERILOG_FILE ExtTuner.v
+set_global_assignment -name VERILOG_FILE ExtAmp.v
 set_global_assignment -name VERILOG_FILE vna_scanner.v
 set_global_assignment -name SDC_FILE Hermes_Lite_CVA9.sdc
 set_global_assignment -name VERILOG_FILE Hermes_Lite_CVA9.v
@@ -234,4 +237,7 @@ set_global_assignment -name SOURCE_FILE db/Hermes_Lite_12CV.cmp.rdb
 set_global_assignment -name SIGNALTAP_FILE stp1.stp
 set_global_assignment -name QIP_FILE Ethernet/phyclocks.qip
 set_global_assignment -name SIP_FILE Ethernet/phyclocks.sip
+set_location_assignment PIN_V10 -to ATU_Start
+set_location_assignment PIN_P8 -to ATU_Status
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to ATU_Status
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
